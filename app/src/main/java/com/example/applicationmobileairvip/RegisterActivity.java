@@ -28,7 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordEditText);
         confirmPasswordEditText = findViewById(R.id.confirmPasswordEditText);
         Button registerButton = findViewById(R.id.registerButton);
-        Button backToLoginButton = findViewById(R.id.backToLoginButton); // 🆕
+        Button backToLoginButton = findViewById(R.id.backToLoginButton);
 
         // Action bouton S’inscrire
         registerButton.setOnClickListener(v -> {
@@ -56,11 +56,11 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        // 🔙 Bouton "J’ai déjà un compte"
+        // Bouton "J’ai déjà un compte"
         backToLoginButton.setOnClickListener(v -> {
             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
             startActivity(intent);
-            finish(); // ferme RegisterActivity pour éviter retour avec le bouton back
+            finish();
         });
     }
 }

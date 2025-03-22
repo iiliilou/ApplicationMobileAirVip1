@@ -22,5 +22,31 @@
     <string name="creer_un_compte_inscription">Créer un compte</string>
     <string name="j_ai_d_j_un_compte_inscription">J’ai déjà un compte</string>
 
+    <string name="reserver_home">Réserver</string>
+    <string name="parametres_home">Paramètres</string>
+    <string name="statut_vol_home">Statut vol</string>
+    <string name="voyages_home">Voyages</string>
+    <string name="fleche_home">➡</string>
+    <string name="date_de_depart_home">Date de départ</string>
+    <string name="date_de_retour_home">Date de retour</string>
+    <string name="rechercher_home">Rechercher</string>
+    <string name="recent_home">Recent</string>
+    <string name="vols_home">Vols</string>
+    <string name="selectionner_la_date_de_depart_home">Sélectionner la date de départ</string>
+    <string name="selectionner_la_date_de_retour_home">Sélectionner la date de retour</string>
+    <string name="choisir_lieu_de_depart_home">Choisir lieu de départ</string>
+    <string name="todo">TODO</string>
+    <string name="reserver_home2">Reserver</string>
+    <string name="choisir_lieu_depart_home">Choisir lieu depart</string>
+    <string name="aller_retour_home">Aller / Retour</string>
+    <string name="recherche_home">Rechercher</string>
+
+    <string name="statut_des_vols_FlightStatus">Statut des vols</string>
+
+    <string name="param_tres_de_l_application_settings">Paramètres de l\'application</string>
+
+    <string name="mes_voyages_reservetrips">Mes voyages réservés</string>
+
+
 
 </resources>
