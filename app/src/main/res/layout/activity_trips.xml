@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/mes_voyages_reservetrips"
+        android:text="@string/mes_voyages_reserves_trips"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="#000000"

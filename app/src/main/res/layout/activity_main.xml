@@ -46,20 +46,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        tools:ignore="ExtraText">
 
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/registerTabButton"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:background="@drawable/button_inscrire"
+            android:textColor="#FFFFFF"
             android:text="@string/s_inscrire"
-            android:textSize="14sp"
-            android:background="@drawable/button_unselected"
-            android:textColor="#666666"
-            android:padding="10dp"
+            android:textSize="16sp"
+            android:padding="12dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
             tools:ignore="VisualLintButtonSize" />
+        >
+
+
     </LinearLayout>
 
     <!-- Email -->

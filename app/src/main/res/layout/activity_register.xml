@@ -152,7 +152,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#EEEEEE"
-        android:text="@string/j_ai_d_j_un_compte_inscription"
+        android:text="@string/j_ai_deja_un_compte_inscription"
         android:textColor="#000000"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="633dp"

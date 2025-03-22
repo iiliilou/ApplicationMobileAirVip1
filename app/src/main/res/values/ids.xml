@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="lastNameEditText" type="id" />
-    <item name="firstNameEditText" type="id">FirstNameEditText</item>
-    <item name="birthDateEditText" type="id">BirthDateEditText</item>
-    <item name="phoneEditText" type="id">PhoneEditText</item>
-    <item name="emailEditText" type="id">EmailEditText</item>
-    <item name="passwordEditText" type="id">PasswordEditText</item>
-    <item name="confirmPasswordEditText" type="id">ConfimPasswordEditText</item>
-    <item name="registerButton" type="id">RegisterButton</item>
-    <item name="backToLoginButton" type="id">BackToLoginButton</item>
-    <item name="loginButton" type="id">LoginButton</item>
-    <item name="registerTabButton" type="id">RegisterTabButton</item>
-    <item name="logoImageView" type="id">LogoImageView</item>
-    <item name="titleText" type="id">TitleText</item>
-    <item name="subText" type="id">SubText</item>
+    <item name="firstNameEditText" type="id" />
+    <item name="birthDateEditText" type="id" />
+    <item name="phoneEditText" type="id" />
+    <item name="emailEditText" type="id" />
+    <item name="passwordEditText" type="id" />
+    <item name="confirmPasswordEditText" type="id" />
+    <item name="registerButton" type="id" />
+    <item name="backToLoginButton" type="id" />
+    <item name="loginButton" type="id" />
+    <item name="registerTabButton" type="id" />
+    <item name="logoImageView" type="id" />
+    <item name="titleText" type="id" />
+    <item name="subText" type="id" />
+    <item name="nav_reserver" type="id" />
+    <item name="nav_status" type="id" />
+    <item name="nav_trips" type="id" />
+    <item name="nav_settings" type="id" />
 </resources>

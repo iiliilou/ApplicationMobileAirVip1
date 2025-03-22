@@ -1,26 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">AirVIPAppMobile</string>
     <string name="se_connecter">Se connecter</string>
-    <string name="adresse_courriel">Adresse Courriel</string>
+    <string name="adresse_courriel">Adresse courriel</string>
     <string name="connexion">Connexion</string>
     <string name="logo">Logo</string>
     <string name="veuillez_entrer_vos_informations">Veuillez entrer vos informations</string>
     <string name="bienvenue">Bienvenue</string>
     <string name="mot_de_passe">Mot de passe</string>
-    <string name="s_inscrire">S\'inscrire</string>
+    <string name="s_inscrire">S’inscrire</string>
     <string name="logo_air_vip">Logo Air VIP</string>
-
 
     <string name="date_de_naissance_jj_mm_aaaa_inscription">Date de naissance (JJ/MM/AAAA)</string>
     <string name="confirmer_le_mot_de_passe_inscription">Confirmer le mot de passe</string>
     <string name="adresse_courriel_inscription">Adresse courriel</string>
     <string name="prenom_inscription">Prénom</string>
     <string name="nom_inscription">Nom</string>
-    <string name="mot_de_passe_inscription">mot_de_passe</string>
+    <string name="mot_de_passe_inscription">Mot de passe</string>
     <string name="numero_de_telephone_inscription">Numéro de téléphone</string>
-    <string name="s_inscrire_inscription">S\'inscrire</string>
+    <string name="s_inscrire_inscription">S’inscrire</string>
     <string name="creer_un_compte_inscription">Créer un compte</string>
-    <string name="j_ai_d_j_un_compte_inscription">J’ai déjà un compte</string>
+    <string name="j_ai_deja_un_compte_inscription">J’ai déjà un compte</string>
 
     <string name="reserver_home">Réserver</string>
     <string name="parametres_home">Paramètres</string>
@@ -30,23 +30,17 @@
     <string name="date_de_depart_home">Date de départ</string>
     <string name="date_de_retour_home">Date de retour</string>
     <string name="rechercher_home">Rechercher</string>
-    <string name="recent_home">Recent</string>
+    <string name="recent_home">Récents</string>
     <string name="vols_home">Vols</string>
     <string name="selectionner_la_date_de_depart_home">Sélectionner la date de départ</string>
     <string name="selectionner_la_date_de_retour_home">Sélectionner la date de retour</string>
     <string name="choisir_lieu_de_depart_home">Choisir lieu de départ</string>
-    <string name="todo">TODO</string>
-    <string name="reserver_home2">Reserver</string>
-    <string name="choisir_lieu_depart_home">Choisir lieu depart</string>
+    <string name="choisir_lieu_depart_home">Choisir lieu d’arrivée</string>
     <string name="aller_retour_home">Aller / Retour</string>
     <string name="recherche_home">Rechercher</string>
+    <string name="todo">À compléter</string>
 
     <string name="statut_des_vols_FlightStatus">Statut des vols</string>
-
-    <string name="param_tres_de_l_application_settings">Paramètres de l\'application</string>
-
-    <string name="mes_voyages_reservetrips">Mes voyages réservés</string>
-
-
-
+    <string name="parametres_de_l_application_settings">Paramètres de l’application</string>
+    <string name="mes_voyages_reserves_trips">Mes voyages réservés</string>
 </resources>
