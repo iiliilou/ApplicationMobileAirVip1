@@ -26,17 +26,26 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17 // Changé à Java 17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
 dependencies {
-
+    // Dépendances de base
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+
+    // Room Database (version catalog)
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.room.compiler)
+
+    // RecyclerView
+    implementation(libs.recyclerview)
+
+    // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
