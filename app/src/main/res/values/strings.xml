@@ -53,4 +53,6 @@
     <string name="deconnexion_parametre">Déconnexion</string>
     <string name="francais_parametre">Français</string>
     <string name="page_mon_compte_compte">Page Mon Compte</string>
+    <string name="lieu_de_depart_home">Lieu de départ</string>
+    <string name="lieu_d_arrive_home">Lieu d\'arrivée</string>
 </resources>

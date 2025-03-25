@@ -3,5 +3,8 @@
     <style name="Base.Theme.ApplicationMobileAirVip" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/my_dark_primary</item>
         <item name="colorOnPrimary">@color/black</item>
+        <item name="android:windowBackground">#121212</item> <!-- Fond sombre -->
     </style>
+
+    <style name="Theme.ApplicationMobileAirVip" parent="Base.Theme.ApplicationMobileAirVip" />
 </resources>

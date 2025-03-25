@@ -88,30 +88,40 @@
             android:gravity="center_vertical"
             android:padding="8dp">
 
-            <TextView
+            <EditText
                 android:id="@+id/fromText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/choisir_lieu_de_depart_home"
+                android:layout_marginEnd="8dp"
+                android:autofillHints=""
+                android:background="@android:drawable/edit_text"
+                android:hint="@string/lieu_de_depart_home"
+                android:padding="8dp"
                 android:textColor="#000000"
-                android:textSize="17sp"
-                tools:ignore="TextSizeCheck" />
+                android:textColorHint="#757575"
+                android:textSize="18sp"
+                tools:ignore="TextFields" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fleche_home"
                 android:textColor="#000000"
-                android:textSize="17sp"
+                android:textSize="18sp"
                 android:layout_marginHorizontal="8dp" />
 
-            <TextView
+            <EditText
                 android:id="@+id/toText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/choisir_lieu_depart_home"
+                android:autofillHints=""
+                android:background="@android:drawable/edit_text"
+                android:hint="@string/lieu_d_arrive_home"
+                android:padding="10dp"
                 android:textColor="#000000"
-                android:textSize="17sp" />
+                android:textColorHint="#757575"
+                android:textSize="18sp"
+                tools:ignore="TextFields" />
         </LinearLayout>
 
 
@@ -121,11 +131,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="4dp"
-            android:text="Aller-retour"
-            android:textColor="#000000"
-            android:textSize="14sp"
             android:clickable="true"
-            android:focusable="true" />
+            android:focusable="true"
+            android:minHeight="48dp"
+            android:text="@string/aller_retour_home"
+            android:textColor="#000000"
+            android:textSize="20sp" />
 
 
         <!-- Options : Date départ, retour, bouton recherche -->
@@ -178,11 +189,13 @@
                     android:id="@+id/editDateRetour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:autofillHints=""
                     android:background="@android:drawable/edit_text"
                     android:hint="@string/selectionner_la_date_de_retour_home"
                     android:inputType="date"
                     android:padding="10dp"
-                    android:textColorHint="#757575" />
+                    android:textColorHint="#757575"
+                    tools:ignore="VisualLintTextFieldSize" />
             </LinearLayout>
 
 

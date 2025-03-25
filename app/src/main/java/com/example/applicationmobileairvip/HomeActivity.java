@@ -1,5 +1,7 @@
 package com.example.applicationmobileairvip;
 
+import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,11 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Calendar;
 import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private TextView fromText, toText;
+    private EditText fromText, toText;
     private EditText departureDateEditText, returnDateEditText;
     private TextView typeVols;
     private View layoutRetour;
@@ -31,8 +34,8 @@ public class HomeActivity extends AppCompatActivity {
         toText = findViewById(R.id.toText);
         departureDateEditText = findViewById(R.id.editDateDepart);
         returnDateEditText = findViewById(R.id.editDateRetour);
-        typeVols = findViewById(R.id.typeVols); // ton TextView cliquable
-        layoutRetour = findViewById(R.id.layoutRetour); // parent du champ "date de retour"
+        typeVols = findViewById(R.id.typeVols);
+        layoutRetour = findViewById(R.id.layoutRetour);
         Button btnRechercher = findViewById(R.id.btnRechercher);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
@@ -46,14 +49,7 @@ public class HomeActivity extends AppCompatActivity {
             popupMenu.setOnMenuItemClickListener(item -> {
                 String selected = Objects.requireNonNull(item.getTitle()).toString();
                 typeVols.setText(selected);
-
-                // Affiche ou masque la date de retour
-                if (selected.equals("Aller simple")) {
-                    layoutRetour.setVisibility(View.GONE);
-                } else {
-                    layoutRetour.setVisibility(View.VISIBLE);
-                }
-
+                layoutRetour.setVisibility(selected.equals("Aller simple") ? View.GONE : View.VISIBLE);
                 return true;
             });
 
@@ -91,13 +87,37 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(this, "Voyages", Toast.LENGTH_SHORT).show();
                 return true;
             } else if (id == R.id.nav_settings) {
-                Toast.makeText(this, "Paramètres", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
                 return true;
             }
 
             return false;
         });
+
+        // Gestion du calendrier au clic
+        departureDateEditText.setOnClickListener(v -> showDatePickerDialog(departureDateEditText));
+        returnDateEditText.setOnClickListener(v -> showDatePickerDialog(returnDateEditText));
+    }
+
+    // Méthode séparée pour le calendrier
+    private void showDatePickerDialog(EditText targetEditText) {
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                (view, selectedYear, selectedMonth, selectedDay) -> {
+                    String selectedDate = selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear;
+                    targetEditText.setText(selectedDate);
+                },
+                year, month, day
+        );
+        datePickerDialog.show();
     }
 }
+
 
 
