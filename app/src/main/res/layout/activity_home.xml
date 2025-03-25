@@ -114,16 +114,19 @@
                 android:textSize="17sp" />
         </LinearLayout>
 
-        <!-- Options points et promotion -->
+
         <TextView
             android:id="@+id/typeVols"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="4dp"
-            android:text="@string/aller_retour_home"
+            android:text="Aller-retour"
             android:textColor="#000000"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:clickable="true"
+            android:focusable="true" />
+
 
         <!-- Options : Date départ, retour, bouton recherche -->
         <LinearLayout
@@ -157,26 +160,31 @@
                 android:textColorHint="#757575"
                 tools:ignore="VisualLintTextFieldSize" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:importantForAutofill="no"
-                android:text="@string/date_de_retour_home"
-                android:textColor="#000000"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="4dp" />
-
-            <EditText
-                android:id="@+id/editDateRetour"
+            <LinearLayout
+                android:id="@+id/layoutRetour"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/edit_text"
-                android:hint="@string/selectionner_la_date_de_retour_home"
-                android:inputType="date"
-                android:padding="10dp"
-                android:textColorHint="#757575"
-                tools:ignore="Autofill,VisualLintTextFieldSize" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/date_de_retour_home"
+                    android:textColor="#000000"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="4dp" />
+
+                <EditText
+                    android:id="@+id/editDateRetour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/edit_text"
+                    android:hint="@string/selectionner_la_date_de_retour_home"
+                    android:inputType="date"
+                    android:padding="10dp"
+                    android:textColorHint="#757575" />
+            </LinearLayout>
+
 
             <Button
                 android:id="@+id/btnRechercher"
@@ -201,7 +209,6 @@
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu"
         tools:ignore="VisualLintBottomNav" />
-
 
 </RelativeLayout>
 
