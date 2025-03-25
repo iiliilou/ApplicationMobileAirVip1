@@ -43,4 +43,14 @@
     <string name="statut_des_vols_FlightStatus">Statut des vols</string>
     <string name="parametres_de_l_application_settings">Paramètres de l’application</string>
     <string name="mes_voyages_reserves_trips">Mes voyages réservés</string>
+
+    <string name="mode_sombre_parametre">Mode sombre</string>
+    <string name="notifications_parametre">Notifications</string>
+    <string name="account_parametre">Account</string>
+    <string name="logout_parametre">Logout</string>
+    <string name="mon_compte_paramatre">Mon compte</string>
+    <string name="langue_parametre">Langue</string>
+    <string name="deconnexion_parametre">Déconnexion</string>
+    <string name="francais_parametre">Français</string>
+    <string name="page_mon_compte_compte">Page Mon Compte</string>
 </resources>
