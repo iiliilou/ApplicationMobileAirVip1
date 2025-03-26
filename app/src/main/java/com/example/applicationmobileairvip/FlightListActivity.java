@@ -36,17 +36,20 @@ public class FlightListActivity extends AppCompatActivity {
         new LoadFlightTask().execute(departure, arrival, date);
     }
 
+
+
+    // Correction de la classe LoadFlightTask
     private class LoadFlightTask extends AsyncTask<String, Void, List<Flight>> {
         @Override
-        protected  List<Flight> doInBackgrount(String... params) {
-            return AppDatabase.getInstance(FlightListActivity.this).flightDao().searchFlights(params[0],params[1],params[2]);
+        protected List<Flight> doInBackground(String... params) {
+            return AppDatabase.getInstance(FlightListActivity.this)
+                    .flightDao()
+                    .searchFlights(params[0], params[1], params[2]); // 3 paramètres
         }
 
-
-
         @Override
-        protected void onPostExecute(List<Flight> flights){
-            adapter = new FlightAdapter(flights);
+        protected void onPostExecute(List<Flight> flights) { // Nom corrigé
+            adapter = new FlightAdapter(flights); // Variable minuscule
             recyclerView.setAdapter(adapter);
         }
     }

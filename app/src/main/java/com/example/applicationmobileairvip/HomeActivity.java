@@ -1,5 +1,6 @@
 package com.example.applicationmobileairvip;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,6 +35,29 @@ public class HomeActivity extends AppCompatActivity {
             String to = toText.getText().toString().trim();
             String depart = departureDateEditText.getText().toString().trim();
             String retour = returnDateEditText.getText().toString().trim();
+
+            // =============================================================================================début du code que j rajouter(rayan)
+
+            //partie rayan pour la liste des vols
+            if(from.isEmpty() || to.isEmpty() || depart.isEmpty()){
+                Toast.makeText(this,  "Veuillez remplir tous les champs obligatoires", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Intent flightListIntent = new Intent(HomeActivity.this, FlightListActivity.class);
+            flightListIntent.putExtra("DEPARTURE", from);
+            flightListIntent.putExtra("ARRIVAL", to);
+            flightListIntent.putExtra("DATE_DEPART", depart);
+            if(!retour.isEmpty()) {
+                flightListIntent.putExtra("DATE_RETOUR", retour);
+            }
+            startActivity(flightListIntent);
+
+            // =============================================================================================  fin du code que j rajouter(rayan)
+
+
+
+
 
             Toast.makeText(this,
                     "Recherche : " + from + " ➡ " + to + "\nDépart : " + depart + " | Retour : " + retour,

@@ -43,4 +43,7 @@
     <string name="statut_des_vols_FlightStatus">Statut des vols</string>
     <string name="parametres_de_l_application_settings">Paramètres de l’application</string>
     <string name="mes_voyages_reserves_trips">Mes voyages réservés</string>
+
+    <string name="resultats_recherche">Résultats de votre recherche</string>
+    <string name="ic_flight">Icône d\'avion</string>
 </resources>
