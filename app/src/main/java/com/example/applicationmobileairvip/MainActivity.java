@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private void authenticateUser(String email, String password) {
         if (email.equals("test@airvip.com") && password.equals("123456")) {
             Toast.makeText(this, "Connexion réussie", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(MainActivity.this, MainActivity.class));
+            startActivity(new Intent(MainActivity.this, HomeActivity.class));
             finish();
         } else {
             Toast.makeText(this, "Email ou mot de passe incorrect", Toast.LENGTH_SHORT).show();
