@@ -63,5 +63,14 @@
     <string name="flight_route_time_format">%1$s ➡ %2$s | %3$s - %4$s</string>
     <string name="model_capacity_format">%1$s | %2$d passagers</string>
     <string name="services_label">Services VIP: %1$s</string>
+    <string name="yul_cun_flightitem">YUL → CUN</string>
+    <string name="_14_04_flightitem">14:04</string>
+    <string name="logo_compagnie_flightitem">Logo compagnie</string>
+    <string name="_13_30_flightitem">13:30</string>
+    <string name="airvip_31_d_missions_flightitem">AirVip · 31% d’émissions</string>
+    <string name="_1_escale_ywg_24_h_34_min_flightitem">1 escale à YWG - 24 h 34 min</string>
+    <string name="_16_046_ca_flightitem">16 046 $CA</string>
+    <string name="aller_retour_flightitem">aller-retour</string>
+    <string name="escale_de_nuit_billets_s_par_s_flightitem">Escale de nuit · Billets séparés</string>
 
 </resources>

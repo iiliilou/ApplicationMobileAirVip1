@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
@@ -27,7 +28,7 @@
                 android:id="@+id/departTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="13:30"
+                android:text="@string/_13_30_flightitem"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:textColor="#000000" />
@@ -40,7 +41,7 @@
                 android:id="@+id/arrivalTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="14:04"
+                android:text="@string/_14_04_flightitem"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:textColor="#000000" />
@@ -54,15 +55,16 @@
                 android:id="@+id/companyLogo"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
+                android:contentDescription="@string/logo_compagnie_flightitem"
                 android:src="@drawable/ic_plane"
-                android:contentDescription="Logo compagnie" />
+                tools:ignore="ImageContrastCheck" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/airportRoute"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="YUL → CUN"
+            android:text="@string/yul_cun_flightitem"
             android:textSize="14sp"
             android:textColor="#666666"
             android:layout_marginTop="2dp" />
@@ -72,7 +74,7 @@
             android:id="@+id/flightDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1 escale à YWG - 24 h 34 min"
+            android:text="@string/_1_escale_ywg_24_h_34_min_flightitem"
             android:textColor="#000000"
             android:textSize="14sp"
             android:layout_marginTop="4dp" />
@@ -82,7 +84,7 @@
             android:id="@+id/flightDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="AirVip · 31% d’émissions"
+            android:text="@string/airvip_31_d_missions_flightitem"
             android:textColor="#00796B"
             android:textSize="13sp"
             android:layout_marginTop="2dp" />
@@ -91,7 +93,7 @@
             android:id="@+id/flightWarnings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Escale de nuit · Billets séparés"
+            android:text="@string/escale_de_nuit_billets_s_par_s_flightitem"
             android:textColor="#D32F2F"
             android:textSize="13sp"
             android:layout_marginTop="2dp" />
@@ -114,8 +116,8 @@
                 android:id="@+id/flightPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="16 046 $CA"
-                android:textColor="#FFA000"
+                android:text="@string/_16_046_ca_flightitem"
+                android:textColor="#EF6C00"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -123,7 +125,7 @@
                 android:id="@+id/flightType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="aller-retour"
+                android:text="@string/aller_retour_flightitem"
                 android:textColor="#000000"
                 android:textSize="14sp"
                 android:layout_marginStart="12dp" />
