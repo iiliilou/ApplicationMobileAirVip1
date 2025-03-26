@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:strokeColor="#DDDDDD"
+    app:strokeWidth="1dp"
+    android:backgroundTint="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- Heures et aéroports -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/departTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="13:30"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#000000" />
+
+            <View
+                android:layout_width="16dp"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/arrivalTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="14:04"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="#000000" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/companyLogo"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_plane"
+                android:contentDescription="Logo compagnie" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/airportRoute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="YUL → CUN"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:layout_marginTop="2dp" />
+
+        <!-- Infos durée et escales -->
+        <TextView
+            android:id="@+id/flightDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1 escale à YWG - 24 h 34 min"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp" />
+
+        <!-- Infos supplémentaires (compagnie, remarques) -->
+        <TextView
+            android:id="@+id/flightDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AirVip · 31% d’émissions"
+            android:textColor="#00796B"
+            android:textSize="13sp"
+            android:layout_marginTop="2dp" />
+
+        <TextView
+            android:id="@+id/flightWarnings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Escale de nuit · Billets séparés"
+            android:textColor="#D32F2F"
+            android:textSize="13sp"
+            android:layout_marginTop="2dp" />
+
+        <!-- Ligne séparation -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#EEEEEE"
+            android:layout_marginVertical="8dp" />
+
+        <!-- Prix + type de billet -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/flightPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="16 046 $CA"
+                android:textColor="#FFA000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/flightType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="aller-retour"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:layout_marginStart="12dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

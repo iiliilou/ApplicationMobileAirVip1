@@ -55,4 +55,13 @@
     <string name="page_mon_compte_compte">Page Mon Compte</string>
     <string name="lieu_de_depart_home">Lieu de départ</string>
     <string name="lieu_d_arrive_home">Lieu d\'arrivée</string>
+
+    <!-- Ajout rayan  -->
+    <string name="airvip_brand">AirVip</string>
+    <string name="reserver_button">Réserver</string>
+    <string name="icone_avion">Icône Avion</string>
+    <string name="flight_route_time_format">%1$s ➡ %2$s | %3$s - %4$s</string>
+    <string name="model_capacity_format">%1$s | %2$d passagers</string>
+    <string name="services_label">Services VIP: %1$s</string>
+
 </resources>
