@@ -72,5 +72,6 @@
     <string name="_16_046_ca_flightitem">16 046 $CA</string>
     <string name="aller_retour_flightitem">aller-retour</string>
     <string name="escale_de_nuit_billets_s_par_s_flightitem">Escale de nuit · Billets séparés</string>
+    <string name="aller_simple_home">Aller simple</string>
 
 </resources>

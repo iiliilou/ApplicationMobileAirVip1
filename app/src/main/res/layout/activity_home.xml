@@ -8,9 +8,7 @@
     tools:context=".MainActivity"
     tools:ignore="ExtraText">
 
-    <!-- Logo en jaune/orange -->
-
-    <!-- Titre "Book" -->
+    <!-- Logo -->
     <ImageView
         android:id="@+id/logoImage"
         android:layout_width="500dp"
@@ -26,6 +24,7 @@
         android:src="@drawable/img_1"
         tools:ignore="ImageContrastCheck" />
 
+    <!-- Titre -->
     <TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
@@ -38,7 +37,7 @@
         android:layout_centerHorizontal="true"
         tools:ignore="RelativeOverlap" />
 
-    <!-- Onglets: Flights et Recents -->
+    <!-- Onglets -->
     <LinearLayout
         android:id="@+id/tabButtons"
         style="?android:attr/buttonBarStyle"
@@ -81,6 +80,7 @@
         android:layout_below="@id/tabButtons"
         android:layout_marginTop="16dp">
 
+        <!-- De → À -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
                 android:padding="8dp"
                 android:textColor="#000000"
                 android:textColorHint="#757575"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 tools:ignore="TextFields" />
 
             <TextView
@@ -107,8 +107,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/fleche_home"
                 android:textColor="#000000"
-                android:textSize="18sp"
-                android:layout_marginHorizontal="8dp" />
+                android:textSize="20sp"
+                android:layout_marginHorizontal="20dp" />
 
             <EditText
                 android:id="@+id/toText"
@@ -120,26 +120,23 @@
                 android:padding="10dp"
                 android:textColor="#000000"
                 android:textColorHint="#757575"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 tools:ignore="TextFields" />
         </LinearLayout>
 
-
         <TextView
-            android:id="@+id/typeVols"
+            android:id="@+id/textAllerSimple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="4dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:minHeight="48dp"
-            android:text="@string/aller_retour_home"
+            android:text="@string/aller_simple_home"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"/>
 
 
-        <!-- Options : Date départ, retour, bouton recherche -->
+        <!-- Date de départ & bouton rechercher -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -171,34 +168,6 @@
                 android:textColorHint="#757575"
                 tools:ignore="VisualLintTextFieldSize" />
 
-            <LinearLayout
-                android:id="@+id/layoutRetour"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/date_de_retour_home"
-                    android:textColor="#000000"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="4dp" />
-
-                <EditText
-                    android:id="@+id/editDateRetour"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autofillHints=""
-                    android:background="@android:drawable/edit_text"
-                    android:hint="@string/selectionner_la_date_de_retour_home"
-                    android:inputType="date"
-                    android:padding="10dp"
-                    android:textColorHint="#757575"
-                    tools:ignore="VisualLintTextFieldSize" />
-            </LinearLayout>
-
-
             <Button
                 android:id="@+id/btnRechercher"
                 android:layout_width="match_parent"
@@ -224,4 +193,5 @@
         tools:ignore="VisualLintBottomNav" />
 
 </RelativeLayout>
+
 
