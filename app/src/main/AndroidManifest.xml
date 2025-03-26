@@ -19,6 +19,7 @@
         <activity android:name=".TripsActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".CompteActivity" />
+        <activity android:name=".FlightListActivity" />
 
         <activity
             android:name=".HomeActivity"
