@@ -1,5 +1,5 @@
 package com.example.applicationmobileairvip;
-
+/**
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -18,3 +18,4 @@ public interface FlightDao {
     @Query("SELECT COUNT(*) FROM Flight")
     int countFlights();
 }
+*/

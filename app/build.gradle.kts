@@ -44,5 +44,8 @@ dependencies {
     annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
     implementation("androidx.room:room-runtime:2.6.1")
     annotationProcessor("androidx.room:room-compiler:2.6.1")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
 
 }

@@ -1,5 +1,5 @@
 package com.example.applicationmobileairvip;
-
+/**
 import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
@@ -23,3 +23,4 @@ public abstract class FlightDatabase extends RoomDatabase {
         return instance;
     }
 }
+*/

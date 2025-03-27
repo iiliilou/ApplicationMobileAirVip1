@@ -1,5 +1,5 @@
 package com.example.applicationmobileairvip;
-
+/**
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -83,3 +83,4 @@ public class Flight {
     public String getLogoUrl() { return logoUrl; }
     public void setLogoUrl(String logoUrl) { this.logoUrl = logoUrl; }
 }
+*/

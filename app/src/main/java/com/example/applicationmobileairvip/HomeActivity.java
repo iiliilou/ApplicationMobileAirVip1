@@ -63,12 +63,12 @@ public class HomeActivity extends AppCompatActivity {
             String depart = departureDateEditText.getText().toString().trim();
             String retour = returnDateEditText.getText().toString().trim();
 
-            // Vérification rapide des champs requis   ajout rayan
+            // Vérification rapide des champs requis   ajout rayan===================
             if (from.isEmpty() || to.isEmpty() || depart.isEmpty()) {
                 Toast.makeText(this, "Veuillez remplir les champs de départ, d'arrivée et de date", Toast.LENGTH_SHORT).show();
                 return;
             }
-            // fin ajout rayan
+            // fin ajout rayan========================================================
 
             String type = typeVols.getText().toString();
             String result = "Recherche : " + from + " ➡ " + to + "\nDépart : " + depart;
@@ -80,13 +80,13 @@ public class HomeActivity extends AppCompatActivity {
             Toast.makeText(this, result, Toast.LENGTH_LONG).show();
 
 
-            // Création de l'intent pour démarrer FlightListActivity    ajout rayan
-            Intent intent = new Intent(this, FlightListActivity.class);
+            // Création de l'intent pour démarrer FlightListActivity    ajout rayan=====
+            Intent intent = new Intent(this, VolListActivity.class);
             intent.putExtra("from", from);
             intent.putExtra("to", to);
             intent.putExtra("departDate", depart);
             intent.putExtra("returnDate", retour);
-            startActivity(intent);    // fin ajout rayan
+            startActivity(intent);    // fin ajout rayan=================================
         });
 
         // Navigation du bas
