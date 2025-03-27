@@ -13,6 +13,9 @@ public class VolListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private VolAdapter volAdapter;
 
+    //recuprere les donne from , to , departDate
+    //appel fonction pour recuprerer les vols via http
+    //met a jour le recyclerView
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,5 +41,6 @@ public class VolListActivity extends AppCompatActivity {
                 );
             }
         });
+
     }
 }

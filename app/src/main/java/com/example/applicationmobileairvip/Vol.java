@@ -2,6 +2,10 @@ package com.example.applicationmobileairvip;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+//permet de stocker donner recu de l'Api (vol_id etc)
+
+//utilisation de jsonproprety pour mapper les noms json aux atributs java
 public class Vol {
     @JsonProperty("vol_id")
     private int volId;
@@ -40,6 +44,7 @@ public class Vol {
         this.temps = temps;
     }
 
+    //getters et setters
     public int getVolId(){return volId;}
     public void setVolId(int volId) { this.volId = volId; }
 

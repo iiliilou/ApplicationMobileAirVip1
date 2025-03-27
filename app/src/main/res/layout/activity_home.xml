@@ -93,7 +93,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:autofillHints=""
                 android:background="@android:drawable/edit_text"
                 android:hint="@string/lieu_de_depart_home"
                 android:padding="8dp"
@@ -114,7 +113,6 @@
                 android:id="@+id/toText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:autofillHints=""
                 android:background="@android:drawable/edit_text"
                 android:hint="@string/lieu_d_arrive_home"
                 android:padding="10dp"
@@ -124,61 +122,74 @@
                 tools:ignore="TextFields" />
         </LinearLayout>
 
+        <!-- Type de vol -->
         <TextView
-            android:id="@+id/textAllerSimple"
+            android:id="@+id/typeVols"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/aller_simple_home"
+            android:text="Type de vol"
             android:textColor="#000000"
-            android:textSize="20sp"
-            android:layout_gravity="center_horizontal"
+            android:textSize="18sp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"/>
+            android:layout_gravity="center_horizontal" />
 
+        <!-- Date de départ -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/date_de_depart_home"
+            android:textColor="#000000"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp" />
 
-        <!-- Date de départ & bouton rechercher -->
-        <LinearLayout
+        <EditText
+            android:id="@+id/editDateDepart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints=""
+            android:background="@android:drawable/edit_text"
+            android:hint="@string/selectionner_la_date_de_depart_home"
+            android:inputType="date"
+            android:padding="10dp"
+            android:textColorHint="#757575" />
+
+        <!-- Date de retour -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date de retour"
+            android:textColor="#000000"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/editDateRetour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/edit_text"
+            android:hint="Sélectionner la date de retour"
+            android:inputType="date"
+            android:padding="10dp"
+            android:textColorHint="#757575" />
+
+        <!-- Layout retour (optionnel) -->
+        <LinearLayout
+            android:id="@+id/layoutRetour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#F3F3F3"
-            android:padding="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="80dp"
-            android:layout_marginHorizontal="4dp"
-            android:layout_gravity="center">
+            android:visibility="gone"
+            android:layout_marginTop="8dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/date_de_depart_home"
-                android:textColor="#000000"
-                android:layout_marginBottom="4dp" />
-
-            <EditText
-                android:id="@+id/editDateDepart"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:background="@android:drawable/edit_text"
-                android:hint="@string/selectionner_la_date_de_depart_home"
-                android:inputType="date"
-                android:padding="10dp"
-                android:textColorHint="#757575"
-                tools:ignore="VisualLintTextFieldSize" />
-
-            <Button
-                android:id="@+id/btnRechercher"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="#FFC107"
-                android:padding="12dp"
-                android:text="@string/rechercher_home"
-                android:textColor="#5D4037"
-                tools:ignore="VisualLintButtonSize,DuplicateSpeakableTextCheck" />
-        </LinearLayout>
+        <!-- Bouton Rechercher -->
+        <Button
+            android:id="@+id/btnRechercher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#FFC107"
+            android:padding="12dp"
+            android:text="@string/rechercher_home"
+            android:textColor="#5D4037" />
     </LinearLayout>
 
     <!-- Bottom Navigation Bar -->
@@ -191,7 +202,4 @@
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu"
         tools:ignore="VisualLintBottomNav" />
-
 </RelativeLayout>
-
-

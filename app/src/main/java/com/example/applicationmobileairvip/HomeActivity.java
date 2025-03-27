@@ -29,7 +29,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // Récupération des vues
         fromText = findViewById(R.id.fromText);
         toText = findViewById(R.id.toText);
         departureDateEditText = findViewById(R.id.editDateDepart);
@@ -38,8 +37,8 @@ public class HomeActivity extends AppCompatActivity {
         layoutRetour = findViewById(R.id.layoutRetour);
         Button btnRechercher = findViewById(R.id.btnRechercher);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.nav_reserver);
 
-        // Sélection du type de vol
         typeVols.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(this, typeVols);
             popupMenu.getMenu().add("Aller-retour");
@@ -56,67 +55,49 @@ public class HomeActivity extends AppCompatActivity {
             popupMenu.show();
         });
 
-        // Bouton de recherche
         btnRechercher.setOnClickListener(v -> {
             String from = fromText.getText().toString().trim();
             String to = toText.getText().toString().trim();
             String depart = departureDateEditText.getText().toString().trim();
             String retour = returnDateEditText.getText().toString().trim();
 
-            // Vérification rapide des champs requis   ajout rayan===================
             if (from.isEmpty() || to.isEmpty() || depart.isEmpty()) {
                 Toast.makeText(this, "Veuillez remplir les champs de départ, d'arrivée et de date", Toast.LENGTH_SHORT).show();
                 return;
             }
-            // fin ajout rayan========================================================
 
-            String type = typeVols.getText().toString();
-            String result = "Recherche : " + from + " ➡ " + to + "\nDépart : " + depart;
-
-            if (!type.equals("Aller simple")) {
-                result += " | Retour : " + retour;
-            }
-
-            Toast.makeText(this, result, Toast.LENGTH_LONG).show();
-
-
-            // Création de l'intent pour démarrer FlightListActivity    ajout rayan=====
             Intent intent = new Intent(this, VolListActivity.class);
             intent.putExtra("from", from);
             intent.putExtra("to", to);
             intent.putExtra("departDate", depart);
             intent.putExtra("returnDate", retour);
-            startActivity(intent);    // fin ajout rayan=================================
+            startActivity(intent);
         });
 
-        // Navigation du bas
+        departureDateEditText.setOnClickListener(v -> showDatePickerDialog(departureDateEditText));
+        returnDateEditText.setOnClickListener(v -> showDatePickerDialog(returnDateEditText));
+
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
 
             if (id == R.id.nav_reserver) {
-                Toast.makeText(this, "Réserver", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(HomeActivity.this, HomeActivity.class));
                 return true;
             } else if (id == R.id.nav_status) {
-                Toast.makeText(this, "Statut vol", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(HomeActivity.this, VolListActivity.class));
                 return true;
             } else if (id == R.id.nav_trips) {
-                Toast.makeText(this, "Voyages", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(HomeActivity.this, TripsActivity.class));
                 return true;
             } else if (id == R.id.nav_settings) {
-                Intent intent = new Intent(this, SettingsActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
                 return true;
             }
 
             return false;
         });
-
-        // Gestion du calendrier au clic
-        departureDateEditText.setOnClickListener(v -> showDatePickerDialog(departureDateEditText));
-        returnDateEditText.setOnClickListener(v -> showDatePickerDialog(returnDateEditText));
     }
 
-    // Méthode séparée pour le calendrier
     private void showDatePickerDialog(EditText targetEditText) {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -134,6 +115,3 @@ public class HomeActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 }
-
-
-

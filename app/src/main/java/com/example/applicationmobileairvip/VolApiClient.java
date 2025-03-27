@@ -14,7 +14,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class VolApiClient {
-    private static final String BASE_URL = "http://10.0.2.2:8080/vols"; // 10.0.2.2
+    private static final String BASE_URL = "http://10.0.2.2:8081/vols"; // 10.0.2.2
     private static final OkHttpClient client = new OkHttpClient();
     private static final ObjectMapper mapper = new ObjectMapper();
     private static final ExecutorService executor = Executors.newSingleThreadExecutor();
