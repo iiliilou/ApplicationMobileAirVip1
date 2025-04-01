@@ -16,6 +16,7 @@ import java.util.List;
 
 /** Gerer l'afficage de la liste des vols dans recycler view
  * transforme chaque vol en une carte visuelle dans flight_item.xml*/
+/*
 public class VolAdapter extends RecyclerView.Adapter<VolAdapter.VolViewHolder> {
 
     private List<Vol> volList;
@@ -66,6 +67,66 @@ public class VolAdapter extends RecyclerView.Adapter<VolAdapter.VolViewHolder> {
         ImageView companyLogo;
         TextView departTime, arrivalTime, airportRoute, flightDuration,
                 flightDetails, flightWarnings, flightPrice, flightType;
+
+        public VolViewHolder(@NonNull View itemView) {
+            super(itemView);
+            companyLogo = itemView.findViewById(R.id.companyLogo);
+            departTime = itemView.findViewById(R.id.departTime);
+            arrivalTime = itemView.findViewById(R.id.arrivalTime);
+            airportRoute = itemView.findViewById(R.id.airportRoute);
+            flightDuration = itemView.findViewById(R.id.flightDuration);
+            flightDetails = itemView.findViewById(R.id.flightDetails);
+            flightWarnings = itemView.findViewById(R.id.flightWarnings);
+            flightPrice = itemView.findViewById(R.id.flightPrice);
+            flightType = itemView.findViewById(R.id.flightType);
+        }
+    }
+}
+*/
+// VolAdapter.java
+
+public class VolAdapter extends RecyclerView.Adapter<VolAdapter.VolViewHolder> {
+    private List<Vol> volList;
+
+    public VolAdapter(List<Vol> volList) {
+        this.volList = volList;
+    }
+
+    @NonNull
+    @Override
+    public VolViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.flight_item, parent, false);
+        return new VolViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull VolViewHolder holder, int position) {
+        Vol vol = volList.get(position);
+
+        holder.departTime.setText("--:--");
+        holder.arrivalTime.setText("--:--");
+
+        holder.airportRoute.setText("Depuis " + vol.getVilleDepart());
+        holder.flightDuration.setText(vol.getTemps() + "h - " + vol.getNb_place() + " places");
+        holder.flightDetails.setText("Prix: " + vol.getPrix() + "$");
+        holder.flightWarnings.setText(vol.getDisponibilite());
+        holder.flightPrice.setText(vol.getPrix() + " $CA");
+        holder.flightType.setText("Vol ID: " + vol.getVol_id());
+
+        Glide.with(holder.itemView.getContext())
+                .load(R.drawable.ic_plane)
+                .placeholder(R.drawable.ic_plane)
+                .into(holder.companyLogo);
+    }
+
+    @Override
+    public int getItemCount() {
+        return volList != null ? volList.size() : 0;
+    }
+
+    public static class VolViewHolder extends RecyclerView.ViewHolder {
+        ImageView companyLogo;
+        TextView departTime, arrivalTime, airportRoute, flightDuration, flightDetails, flightWarnings, flightPrice, flightType;
 
         public VolViewHolder(@NonNull View itemView) {
             super(itemView);
