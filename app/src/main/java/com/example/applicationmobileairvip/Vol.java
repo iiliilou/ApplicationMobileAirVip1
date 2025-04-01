@@ -1,74 +1,71 @@
 package com.example.applicationmobileairvip;
 
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-//permet de stocker donner recu de l'Api (vol_id etc)
-
-//utilisation de jsonproprety pour mapper les noms json aux atributs java
 public class Vol {
-    @JsonProperty("vol_id")
-    private int volId;
-
-    @JsonProperty("prix")
+    private int vol_id;
     private double prix;
-
-    @JsonProperty("disponibilite")
     private String disponibilite;
-
-    @JsonProperty("nb_place")
-    private int nbPlace;
-
-    @JsonProperty("FKAeroport_arrive")
-    private int fkAeroportArrive;
-
-    @JsonProperty("FK_Aeroport_depart")
-    private int fkAeroportDepart;
-
-    @JsonProperty("FK_avion")
-    private int fkAvion;
-
-    @JsonProperty("temps")
+    private int nb_place;
     private double temps;
 
-    public Vol(int volId, double prix, String disponibilite, int NbPlace,
-               int fkAeroportArrive, int fkAeroportDepart, int fkAvion, double temps) {
+    private Aeroport aeroportDepart;
+    private Aeroport aeroportArrive;
+    private Avions avion;
 
-        this.volId = volId;
-        this.prix  = prix;
+    // Constructeur vide requis pour le parsing
+    public Vol() {}
+
+    // Constructeur complet (optionnel)
+    public Vol(int vol_id, double prix, String disponibilite, int nb_place, double temps,
+               Aeroport aeroportDepart, Aeroport aeroportArrive, Avions avion) {
+        this.vol_id = vol_id;
+        this.prix = prix;
         this.disponibilite = disponibilite;
-        this.nbPlace = nbPlace;
-        this.fkAeroportArrive =fkAeroportArrive;
-        this.fkAeroportDepart = fkAeroportDepart;
-        this.fkAvion = fkAvion;
+        this.nb_place = nb_place;
         this.temps = temps;
+        this.aeroportDepart = aeroportDepart;
+        this.aeroportArrive = aeroportArrive;
+        this.avion = avion;
     }
 
-    //getters et setters
-    public int getVolId(){return volId;}
-    public void setVolId(int volId) { this.volId = volId; }
+    // Getters
+    public int getVol_id() {
+        return vol_id;
+    }
 
-    public double getPrix(){return prix;}
-    public void setPrix(double prix){this.prix = prix; }
+    public double getPrix() {
+        return prix;
+    }
 
-    public String getDisponibilite(){return disponibilite; }
-    public void setDisponibilite(String disponibilite){this.disponibilite = disponibilite; }
+    public String getDisponibilite() {
+        return disponibilite;
+    }
 
-    public int getNbPlace(){return nbPlace;}
-    public void setNbPlace(int nbPlace){this.nbPlace = nbPlace;}
+    public int getNb_place() {
+        return nb_place;
+    }
 
-    public int getFkAeroportArrive(){return fkAeroportArrive;}
-    public void setFkAeroportArrive(int fkAeroportArrive){this.fkAeroportArrive = fkAeroportArrive;}
+    public double getTemps() {
+        return temps;
+    }
 
-    public int getFkAeroportDepart(){return fkAeroportDepart;}
-    public void setFkAeroportDepart(int fkAeroportDepart){this.fkAeroportDepart = fkAeroportDepart;}
+    public Aeroport getAeroportDepart() {
+        return aeroportDepart;
+    }
 
-    public int getFkAvion(){return fkAvion;}
-    public void setFkAvion(int fkAvion){this.fkAvion = fkAvion;}
+    public Aeroport getAeroportArrive() {
+        return aeroportArrive;
+    }
 
-    public double getTemps(){return temps;}
-    public void setTemps(double temps){this.temps = temps;}
+    public Avions getAvion() {
+        return avion;
+    }
 
+    // Méthodes utiles pour l'affichage
+    public String getVilleDepart() {
+        return aeroportDepart != null ? aeroportDepart.getVille() : "Inconnu";
+    }
 
-
+    public String getVilleArrivee() {
+        return aeroportArrive != null ? aeroportArrive.getVille() : "Inconnu";
+    }
 }

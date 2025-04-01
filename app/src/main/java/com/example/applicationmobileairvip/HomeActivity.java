@@ -37,8 +37,8 @@ public class HomeActivity extends AppCompatActivity {
         layoutRetour = findViewById(R.id.layoutRetour);
         Button btnRechercher = findViewById(R.id.btnRechercher);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.nav_reserver);
 
+        // Gestion des types de vols
         typeVols.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(this, typeVols);
             popupMenu.getMenu().add("Aller-retour");
@@ -55,6 +55,7 @@ public class HomeActivity extends AppCompatActivity {
             popupMenu.show();
         });
 
+        // Lancer la recherche de vols
         btnRechercher.setOnClickListener(v -> {
             String from = fromText.getText().toString().trim();
             String to = toText.getText().toString().trim();
@@ -74,28 +75,24 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        departureDateEditText.setOnClickListener(v -> showDatePickerDialog(departureDateEditText));
-        returnDateEditText.setOnClickListener(v -> showDatePickerDialog(returnDateEditText));
-
+        // Navigation entre les activités via la barre inférieure
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
-
-            if (id == R.id.nav_reserver) {
-                startActivity(new Intent(HomeActivity.this, HomeActivity.class));
-                return true;
-            } else if (id == R.id.nav_status) {
-                startActivity(new Intent(HomeActivity.this, VolListActivity.class));
+            if (id == R.id.nav_status) {
+                startActivity(new Intent(this, VolListActivity.class));
                 return true;
             } else if (id == R.id.nav_trips) {
-                startActivity(new Intent(HomeActivity.this, TripsActivity.class));
+                startActivity(new Intent(this, TripsActivity.class));
                 return true;
             } else if (id == R.id.nav_settings) {
-                startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
+                startActivity(new Intent(this, SettingsActivity.class));
                 return true;
             }
-
             return false;
         });
+
+        departureDateEditText.setOnClickListener(v -> showDatePickerDialog(departureDateEditText));
+        returnDateEditText.setOnClickListener(v -> showDatePickerDialog(returnDateEditText));
     }
 
     private void showDatePickerDialog(EditText targetEditText) {
