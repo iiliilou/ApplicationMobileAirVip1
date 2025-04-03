@@ -13,50 +13,66 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-
-/** Gerer l'afficage de la liste des vols dans recycler view
- * transforme chaque vol en une carte visuelle dans flight_item.xml*/
 public class VolAdapter extends RecyclerView.Adapter<VolAdapter.VolViewHolder> {
 
     private List<Vol> volList;
-
 
     public VolAdapter(List<Vol> volList) {
         this.volList = volList;
     }
 
-
-
     @NonNull
     @Override
-    //creer une vue d'item
     public VolViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.flight_item, parent, false);
         return new VolViewHolder(view);
     }
 
-    //remplit les vues avec les donnees du vol
     @Override
     public void onBindViewHolder(@NonNull VolViewHolder holder, int position) {
         Vol vol = volList.get(position);
 
+        // 🕒 Horaires fictifs (peuvent être mis à jour avec des vrais si tu les ajoutes)
         holder.departTime.setText("--:--");
         holder.arrivalTime.setText("--:--");
-        holder.airportRoute.setText("Départ ID: " + vol.getFkAeroportDepart() + " ➡ Arrivée ID: " + vol.getFkAeroportArrive());
-        holder.flightDuration.setText(vol.getTemps() + "h - " + vol.getNbPlace() + " places");
-        holder.flightDetails.setText("Avion ID: " + vol.getFkAvion());
-        holder.flightWarnings.setText(vol.getDisponibilite());
-        holder.flightPrice.setText(vol.getPrix() + " $CA");
-        holder.flightType.setText("Vol ID: " + vol.getVolId());
 
-        Glide.with(holder.itemView.getContext())
-                .load(R.drawable.ic_plane)
-                .placeholder(R.drawable.ic_plane)
-                .into(holder.companyLogo);
+        // 🛫 Affichage villes de départ/arrivée
+        holder.airportRoute.setText(
+                vol.getAeroportDepart().getVille() + " ➡ " + vol.getAeroportArrive().getVille()
+        );
+
+        // ⏱ Durée + nb places
+        holder.flightDuration.setText(vol.getTemps() + "h - " + vol.getNbPlace() + " places");
+
+        // ✈️ Modèle avion
+        holder.flightDetails.setText(vol.getAvion().getModele());
+
+        // ⚠️ Disponibilité
+        holder.flightWarnings.setText(vol.getDisponibilite());
+
+        // 💰 Prix
+        holder.flightPrice.setText(vol.getPrix() + " $CA");
+
+        // 📦 ID vol
+        holder.flightType.setText("Vol #" + vol.getVolId());
+
+        // 🖼 Charger la première image de l’avion
+        String imageUrl = null;
+        if (vol.getAvion().getImages() != null && !vol.getAvion().getImages().isEmpty()) {
+            imageUrl = vol.getAvion().getImages().get(0).getUrl();
+        }
+
+        if (imageUrl != null) {
+            Glide.with(holder.itemView.getContext())
+                    .load(imageUrl)
+                    .placeholder(R.drawable.ic_plane) // Icône par défaut si chargement lent
+                    .into(holder.companyLogo);
+        } else {
+            holder.companyLogo.setImageResource(R.drawable.ic_plane);
+        }
     }
 
-    //nombre de vol affiches
     @Override
     public int getItemCount() {
         return volList.size();
