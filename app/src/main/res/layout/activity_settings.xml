@@ -29,56 +29,6 @@
                 android:paddingBottom="24dp"
                 android:textColor="?android:textColorPrimary" />
 
-            <!-- Notifications -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingVertical="12dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/notifications_parametre"
-                    android:textSize="18sp"
-                    android:textColor="?android:textColorPrimary" />
-
-                <Switch
-                    android:id="@+id/switch_notifications"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    tools:ignore="DuplicateSpeakableTextCheck,UseSwitchCompatOrMaterialXml" />
-            </LinearLayout>
-
-            <!-- Mode sombre -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingVertical="12dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/mode_sombre_parametre"
-                    android:textSize="18sp"
-                    android:textColor="?android:textColorPrimary" />
-
-                <Switch
-                    android:id="@+id/switch_dark_mode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:minWidth="48dp"
-                    android:minHeight="48dp"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
-            </LinearLayout>
-
             <!-- Mon compte -->
             <LinearLayout
                 android:id="@+id/layout_account"
@@ -104,33 +54,6 @@
                     android:layout_height="24dp"
                     android:src="@drawable/ic_arrow_right"
                     android:contentDescription="@string/account_parametre" />
-            </LinearLayout>
-
-            <!-- Langue -->
-            <LinearLayout
-                android:id="@+id/layout_language"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingVertical="16dp"
-                android:clickable="true"
-                android:focusable="true">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/langue_parametre"
-                    android:textSize="18sp"
-                    android:textColor="?android:textColorPrimary" />
-
-                <TextView
-                    android:id="@+id/tv_current_language"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/francais_parametre"
-                    android:textColor="?android:textColorSecondary" />
             </LinearLayout>
 
             <!-- Déconnexion -->
@@ -173,5 +96,4 @@
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu"
         tools:ignore="VisualLintBottomNav" />
-
 </RelativeLayout>

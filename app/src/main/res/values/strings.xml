@@ -33,7 +33,6 @@
     <string name="recent_home">Récents</string>
     <string name="vols_home">Vols</string>
     <string name="selectionner_la_date_de_depart_home">Sélectionner la date de départ</string>
-    <string name="selectionner_la_date_de_retour_home">Sélectionner la date de retour</string>
     <string name="choisir_lieu_de_depart_home">Choisir lieu de départ</string>
     <string name="choisir_lieu_depart_home">Choisir lieu d’arrivée</string>
     <string name="aller_retour_home">Aller / Retour</string>
@@ -73,5 +72,11 @@
     <string name="aller_retour_flightitem">aller-retour</string>
     <string name="escale_de_nuit_billets_s_par_s_flightitem">Escale de nuit · Billets séparés</string>
     <string name="aller_simple_home">Aller simple</string>
+    <string name="modifier_le_profil_compte">Modifier le profil</string>
+    <string name="deconnexion_compte">Déconnexion</string>
+    <string name="prenom_compte">"Prenom : "</string>
+    <string name="nom_compte">"Nom : "</string>
+    <string name="numero_telephone_compte">Numero telephone :</string>
+    <string name="email_compte">"Email : "</string>
 
 </resources>
