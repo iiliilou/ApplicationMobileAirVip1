@@ -15,10 +15,16 @@ import java.util.List;
 
 public class VolAdapter extends RecyclerView.Adapter<VolAdapter.VolViewHolder> {
 
-    private List<Vol> volList;
+    public interface OnVolClickListener {
+        void onVolClick(Vol vol);
+    }
 
-    public VolAdapter(List<Vol> volList) {
+    private final List<Vol> volList;
+    private final OnVolClickListener clickListener;
+
+    public VolAdapter(List<Vol> volList, OnVolClickListener clickListener) {
         this.volList = volList;
+        this.clickListener = clickListener;
     }
 
     @NonNull
@@ -33,31 +39,20 @@ public class VolAdapter extends RecyclerView.Adapter<VolAdapter.VolViewHolder> {
     public void onBindViewHolder(@NonNull VolViewHolder holder, int position) {
         Vol vol = volList.get(position);
 
-        // 🕒 Horaires fictifs (peuvent être mis à jour avec des vrais si tu les ajoutes)
         holder.departTime.setText("--:--");
         holder.arrivalTime.setText("--:--");
 
-        // 🛫 Affichage villes de départ/arrivée
         holder.airportRoute.setText(
                 vol.getAeroportDepart().getVille() + " ➡ " + vol.getAeroportArrive().getVille()
         );
 
-        // ⏱ Durée + nb places
         holder.flightDuration.setText(vol.getTemps() + "h - " + vol.getNbPlace() + " places");
-
-        // ✈️ Modèle avion
         holder.flightDetails.setText(vol.getAvion().getModele());
-
-        // ⚠️ Disponibilité
         holder.flightWarnings.setText(vol.getDisponibilite());
-
-        // 💰 Prix
         holder.flightPrice.setText(vol.getPrix() + " $CA");
-
-        // 📦 ID vol
         holder.flightType.setText("Vol #" + vol.getVolId());
 
-        // 🖼 Charger la première image de l’avion
+        // Charger l’image de l’avion
         String imageUrl = null;
         if (vol.getAvion().getImages() != null && !vol.getAvion().getImages().isEmpty()) {
             imageUrl = vol.getAvion().getImages().get(0).getUrl();
@@ -66,11 +61,14 @@ public class VolAdapter extends RecyclerView.Adapter<VolAdapter.VolViewHolder> {
         if (imageUrl != null) {
             Glide.with(holder.itemView.getContext())
                     .load(imageUrl)
-                    .placeholder(R.drawable.ic_plane) // Icône par défaut si chargement lent
+                    .placeholder(R.drawable.ic_plane)
                     .into(holder.companyLogo);
         } else {
             holder.companyLogo.setImageResource(R.drawable.ic_plane);
         }
+
+        // ➕ Clic sur le vol
+        holder.itemView.setOnClickListener(v -> clickListener.onVolClick(vol));
     }
 
     @Override

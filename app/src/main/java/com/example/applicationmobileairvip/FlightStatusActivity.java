@@ -1,52 +1,36 @@
 package com.example.applicationmobileairvip;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class FlightStatusActivity extends AppCompatActivity {
 
-    @SuppressLint("SetTextI18n")
+    private TextView tvNumeroVol, tvHeureDecollage, tvDateVol, tvDepart, tvArrivee, tvStatut;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flight_status);
 
         // Lier les vues
-        TextView tvNumeroVol = findViewById(R.id.numeroVol);
-        TextView tvHeureDecollage = findViewById(R.id.heureDecollage);
-        TextView tvDateVol = findViewById(R.id.dateVol);
-        TextView tvDepart = findViewById(R.id.aeroportDepart);
-        TextView tvArrivee = findViewById(R.id.aeroportArrivee);
-        TextView tvStatut = findViewById(R.id.retardStatut);
+        tvNumeroVol = findViewById(R.id.numeroVol);
+        tvHeureDecollage = findViewById(R.id.heureDecollage);
+        tvDateVol = findViewById(R.id.dateVol);
+        tvDepart = findViewById(R.id.aeroportDepart);
+        tvArrivee = findViewById(R.id.aeroportArrivee);
+        tvStatut = findViewById(R.id.retardStatut);
 
-        // 🔁 Exemple de données simulées ( les passer par Intent plus tard)
-        tvNumeroVol.setText("Vol : AI245");
-        tvHeureDecollage.setText("Heure de décollage : 13h30");
-        tvDateVol.setText("Date : 7 avril 2025");
-        tvDepart.setText("Départ : YUL (Montréal)");
-        tvArrivee.setText("Arrivée : CDG (Paris)");
-
-        boolean enRetard = false; //  changer ça dynamiquement selon l’API
-
-        if (enRetard) {
-            tvStatut.setText("Statut :  Retardé de 45 min");
-            tvStatut.setTextColor(Color.parseColor("#D32F2F")); // rouge
-        } else {
-            tvStatut.setText("Statut :  À l'heure");
-            tvStatut.setTextColor(Color.parseColor("#4CAF50")); // vert
-        }
-
-        // 🔽 Navigation du bas
+        // Navigation inférieure
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.nav_status); // active l'onglet "Statut"
-
+        bottomNavigationView.setSelectedItemId(R.id.nav_status);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_reserver) {
@@ -61,6 +45,53 @@ public class FlightStatusActivity extends AppCompatActivity {
             }
             return false;
         });
+
+        // Récupère l’ID du vol envoyé depuis une autre activité
+        int volId = getIntent().getIntExtra("vol_id", -1);
+        if (volId != -1) {
+            chargerStatutVol(volId);
+        } else {
+            Toast.makeText(this, "Aucun ID de vol reçu", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void chargerStatutVol(int volId) {
+        ApiClient.get("/vols/" + volId, new ApiClient.ApiCallback() {
+            @Override
+            public void onSuccess(String response) {
+                try {
+                    ObjectMapper mapper = new ObjectMapper();
+                    Vol vol = mapper.readValue(response, Vol.class);
+
+                    runOnUiThread(() -> {
+                        tvNumeroVol.setText("Vol #" + vol.getVolId());
+                        tvHeureDecollage.setText("Heure de décollage : --:--"); // peut être mise à jour plus tard
+                        tvDateVol.setText("Durée : " + vol.getTemps() + " h");
+                        tvDepart.setText("Départ : " + vol.getAeroportDepart().getCodeIATA());
+                        tvArrivee.setText("Arrivée : " + vol.getAeroportArrive().getCodeIATA());
+
+                        // Simuler un statut
+                        boolean enRetard = false;
+                        if (enRetard) {
+                            tvStatut.setText("Statut : Retardé de 45 min");
+                            tvStatut.setTextColor(Color.parseColor("#D32F2F"));
+                        } else {
+                            tvStatut.setText("Statut : À l'heure");
+                            tvStatut.setTextColor(Color.parseColor("#4CAF50"));
+                        }
+                    });
+
+                } catch (Exception e) {
+                    runOnUiThread(() ->
+                            Toast.makeText(FlightStatusActivity.this, "Erreur JSON : " + e.getMessage(), Toast.LENGTH_LONG).show());
+                }
+            }
+
+            @Override
+            public void onError(Exception e) {
+                runOnUiThread(() ->
+                        Toast.makeText(FlightStatusActivity.this, "Erreur API : " + e.getMessage(), Toast.LENGTH_LONG).show());
+            }
+        });
     }
 }
-

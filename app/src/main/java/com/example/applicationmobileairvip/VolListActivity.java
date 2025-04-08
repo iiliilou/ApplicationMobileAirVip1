@@ -1,23 +1,27 @@
 package com.example.applicationmobileairvip;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.List;
-import org.json.JSONObject;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.json.JSONObject;
+
+import java.util.List;
 
 public class VolListActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private VolAdapter volAdapter;
 
-    //recuprere les donne from , to , departDate
-    //appel fonction pour recuprerer les vols via http
-    //met a jour le recyclerView
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +31,25 @@ public class VolListActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         loadVols();
+
+        // ✅ Barre de navigation du bas
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.nav_status);
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.nav_reserver) {
+                startActivity(new Intent(this, HomeActivity.class));
+                return true;
+            } else if (id == R.id.nav_trips) {
+                startActivity(new Intent(this, TripsActivity.class));
+                return true;
+            } else if (id == R.id.nav_settings) {
+                startActivity(new Intent(this, SettingsActivity.class));
+                return true;
+            }
+            return false;
+        });
     }
 
     private void loadVols() {
@@ -34,18 +57,17 @@ public class VolListActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String response) {
                 try {
-                    // Conversion de la réponse JSON en objets Vol
                     ObjectMapper objectMapper = new ObjectMapper();
-                    List<Vol> vols = objectMapper.readValue(response, 
-                        objectMapper.getTypeFactory().constructCollectionType(List.class, Vol.class));
-                    
+                    List<Vol> vols = objectMapper.readValue(response,
+                            objectMapper.getTypeFactory().constructCollectionType(List.class, Vol.class));
+
                     runOnUiThread(() -> {
-                        volAdapter = new VolAdapter(vols);
+                        volAdapter = new VolAdapter(vols, vol -> reserverVol(vol.getVolId()));
                         recyclerView.setAdapter(volAdapter);
                     });
                 } catch (Exception e) {
-                    runOnUiThread(() -> 
-                        Toast.makeText(VolListActivity.this, "Erreur de traitement: " + e.getMessage(), Toast.LENGTH_LONG).show()
+                    runOnUiThread(() ->
+                            Toast.makeText(VolListActivity.this, "Erreur de traitement : " + e.getMessage(), Toast.LENGTH_LONG).show()
                     );
                 }
             }
@@ -53,78 +75,22 @@ public class VolListActivity extends AppCompatActivity {
             @Override
             public void onError(Exception e) {
                 runOnUiThread(() ->
-                    Toast.makeText(VolListActivity.this, "Erreur de chargement: " + e.getMessage(), Toast.LENGTH_LONG).show()
+                        Toast.makeText(VolListActivity.this, "Erreur de chargement : " + e.getMessage(), Toast.LENGTH_LONG).show()
                 );
             }
         });
     }
 
-    private void registerUser(String nom, String prenom, String email, String motdepasse) {
+    private void reserverVol(int volId) {
         try {
-            JSONObject userData = new JSONObject();
-            userData.put("nom", nom);
-            userData.put("prenom", prenom);
-            userData.put("adresse_courriel", email);
-            userData.put("mot_de_passe", motdepasse);
+            SharedPreferences prefs = getSharedPreferences("user_session", MODE_PRIVATE);
+            int userId = prefs.getInt("user_id", -1);
 
-            ApiClient.post("/utilisateurs", userData, new ApiClient.ApiCallback() {
-                @Override
-                public void onSuccess(String response) {
-                    runOnUiThread(() -> {
-                        Toast.makeText(VolListActivity.this, "Inscription réussie !", Toast.LENGTH_SHORT).show();
-                        // Ne pas appeler finish() ici, car ce n'est pas RegisterActivity
-                    });
-                }
-
-                @Override
-                public void onError(Exception e) {
-                    runOnUiThread(() -> 
-                        Toast.makeText(VolListActivity.this, "Erreur lors de l'inscription: " + e.getMessage(), Toast.LENGTH_SHORT).show()
-                    );
-                }
-            });
-        } catch (Exception e) {
-            Toast.makeText(this, "Erreur: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void searchVols(String depart, String arrivee) {
-        String searchEndpoint = "/vols/search?depart=" + depart + "&arrivee=" + arrivee;
-        
-        ApiClient.get(searchEndpoint, new ApiClient.ApiCallback() {
-            @Override
-            public void onSuccess(String response) {
-                try {
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    List<Vol> vols = objectMapper.readValue(response, 
-                        objectMapper.getTypeFactory().constructCollectionType(List.class, Vol.class));
-                    
-                    runOnUiThread(() -> {
-                        volAdapter = new VolAdapter(vols);
-                        recyclerView.setAdapter(volAdapter);
-                        
-                        if (vols.isEmpty()) {
-                            Toast.makeText(VolListActivity.this, "Aucun vol trouvé", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } catch (Exception e) {
-                    runOnUiThread(() -> 
-                        Toast.makeText(VolListActivity.this, "Erreur de traitement: " + e.getMessage(), Toast.LENGTH_LONG).show()
-                    );
-                }
+            if (userId == -1) {
+                Toast.makeText(this, "Utilisateur non connecté", Toast.LENGTH_SHORT).show();
+                return;
             }
 
-            @Override
-            public void onError(Exception e) {
-                runOnUiThread(() ->
-                    Toast.makeText(VolListActivity.this, "Erreur de recherche: " + e.getMessage(), Toast.LENGTH_LONG).show()
-                );
-            }
-        });
-    }
-
-    private void reserverVol(int volId, int userId) {
-        try {
             JSONObject reservationData = new JSONObject();
             reservationData.put("vol_id", volId);
             reservationData.put("user_id", userId);
@@ -132,43 +98,21 @@ public class VolListActivity extends AppCompatActivity {
             ApiClient.post("/reservations", reservationData, new ApiClient.ApiCallback() {
                 @Override
                 public void onSuccess(String response) {
-                    runOnUiThread(() -> {
-                        Toast.makeText(getApplicationContext(), "Réservation effectuée avec succès !", Toast.LENGTH_SHORT).show();
-                        // Naviguer vers l'écran de confirmation ou historique des réservations
-                    });
+                    runOnUiThread(() ->
+                            Toast.makeText(VolListActivity.this, "Réservation effectuée avec succès !", Toast.LENGTH_SHORT).show()
+                    );
                 }
 
                 @Override
                 public void onError(Exception e) {
-                    runOnUiThread(() -> 
-                        Toast.makeText(getApplicationContext(), "Erreur lors de la réservation: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                    runOnUiThread(() ->
+                            Toast.makeText(VolListActivity.this, "Erreur lors de la réservation : " + e.getMessage(), Toast.LENGTH_SHORT).show()
                     );
                 }
             });
-        } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Erreur: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
 
-    private void updateUserPreferences(int userId, JSONObject preferencesData) {
-        try {
-            ApiClient.put("/utilisateurs/" + userId + "/preferences", preferencesData, new ApiClient.ApiCallback() {
-                @Override
-                public void onSuccess(String response) {
-                    runOnUiThread(() -> {
-                        Toast.makeText(getApplicationContext(), "Préférences mises à jour avec succès !", Toast.LENGTH_SHORT).show();
-                    });
-                }
-
-                @Override
-                public void onError(Exception e) {
-                    runOnUiThread(() -> 
-                        Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour des préférences: " + e.getMessage(), Toast.LENGTH_SHORT).show()
-                    );
-                }
-            });
         } catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Erreur: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Erreur : " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 }
