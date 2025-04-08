@@ -78,5 +78,9 @@
     <string name="nom_compte">"Nom : "</string>
     <string name="numero_telephone_compte">Numero telephone :</string>
     <string name="email_compte">"Email : "</string>
+    <string name="confirmation_confirmation">Confirmation</string>
+    <string name="retour_l_accueil_confirmation">Retour à l’accueil</string>
+    <string name="votre_paiement_a_t_confirm_confirmation">Votre paiement a été confirmé !</string>
+    <string name="merci_pour_votre_r_servation_avec_airvip_confirmation">Merci pour votre réservation avec AirVIP </string>
 
 </resources>

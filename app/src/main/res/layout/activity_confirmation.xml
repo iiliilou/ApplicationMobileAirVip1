@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="#FFFFFF"
+    tools:context=".ConfirmationActivity">
+
+    <ImageView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:contentDescription="@string/confirmation_confirmation"
+        android:src="@drawable/img_1"
+        tools:ignore="ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/textConfirmation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/votre_paiement_a_t_confirm_confirmation"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:id="@+id/textDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/merci_pour_votre_r_servation_avec_airvip_confirmation"
+        android:textSize="16sp"
+        android:textColor="#666666"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/btnRetourAccueil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#FFC107"
+        android:text="@string/retour_l_accueil_confirmation"
+        android:textColor="#FFFF"
+        tools:ignore="TextContrastCheck,VisualLintButtonSize" />
+
+</LinearLayout>
