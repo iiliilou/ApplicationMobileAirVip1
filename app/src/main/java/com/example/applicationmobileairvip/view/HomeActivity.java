@@ -1,4 +1,4 @@
-package com.example.applicationmobileairvip;
+package com.example.applicationmobileairvip.view;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.applicationmobileairvip.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Calendar;
