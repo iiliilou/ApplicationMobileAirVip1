@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
                         String role = json.getString("role");
                         int userId = json.getInt("id");
 
+
+
                         SharedPreferences prefs = getSharedPreferences("user_session", MODE_PRIVATE);
                         prefs.edit()
                                 .putString("token", token)
@@ -95,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
                         runOnUiThread(() -> Toast.makeText(MainActivity.this, "Erreur JSON : " + e.getMessage(), Toast.LENGTH_LONG).show());
                     }
                 }
-
                 @Override
                 public void onError(Exception e) {
                     runOnUiThread(() -> Toast.makeText(MainActivity.this, "Erreur : " + e.getMessage(), Toast.LENGTH_LONG).show());
