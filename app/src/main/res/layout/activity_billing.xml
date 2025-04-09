@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Adresse de facturation"
+            android:text="@string/adresse_de_facturation_billng"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="#000000"
@@ -27,70 +27,98 @@
             android:id="@+id/editPrenom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Prénom"
-            android:inputType="textPersonName" />
+            android:autofillHints=""
+            android:hint="@string/pr_nom_billing"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            tools:ignore="VisualLintTextFieldSize" />
 
         <EditText
             android:id="@+id/editNom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nom"
+            android:layout_marginTop="12dp"
+            android:autofillHints=""
+            android:hint="@string/nombilling"
             android:inputType="textPersonName"
-            android:layout_marginTop="12dp" />
+            android:minHeight="48dp"
+            android:textColorHint="#757575"
+            tools:ignore="VisualLintTextFieldSize" />
 
         <EditText
             android:id="@+id/editAdresse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Adresse (rue, numéro)"
-            android:inputType="textPostalAddress"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="12dp"
+            android:autofillHints=""
+            android:hint="@string/adresse_rue_num_ro_billing"
+            android:minHeight="48dp"
+            android:textColorHint="#757575"
+            tools:ignore="TextFields,VisualLintTextFieldSize" />
 
         <EditText
             android:id="@+id/editVille"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ville"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="12dp"
+            android:autofillHints=""
+            android:hint="@string/ville_billing"
+            android:importantForAutofill="no"
+            android:minHeight="48dp"
+            android:textColorHint="#757575"
+            tools:ignore="TextFields,VisualLintTextFieldSize" />
 
         <EditText
             android:id="@+id/editProvince"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Province / État"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="12dp"
+            android:hint="@string/province_tat_billing"
+            android:minHeight="48dp"
+            android:textColorHint="#757575"
+            tools:ignore="Autofill,TextFields,VisualLintTextFieldSize" />
 
         <EditText
             android:id="@+id/editCodePostal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Code postal"
-            android:inputType="textPostalAddress"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="12dp"
+            android:autofillHints=""
+            android:hint="@string/code_postal_billing"
+            android:importantForAutofill="no"
+            android:minHeight="48dp"
+            android:textColorHint="#757575"
+            tools:ignore="TextFields,VisualLintTextFieldSize" />
 
         <EditText
             android:id="@+id/editPays"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Pays"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="12dp"
+            android:autofillHints=""
+            android:hint="@string/pays_billing"
+            android:minHeight="48dp"
+            tools:ignore="TextFields,VisualLintTextFieldSize" />
 
         <EditText
             android:id="@+id/editTelephone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Téléphone"
+            android:layout_marginTop="12dp"
+            android:hint="@string/t_l_phone_billing"
             android:inputType="phone"
-            android:layout_marginTop="12dp" />
+            android:minHeight="48dp"
+            tools:ignore="Autofill,VisualLintTextFieldSize" />
 
         <Button
             android:id="@+id/btnConfirmerAdresse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Confirmer"
             android:layout_marginTop="24dp"
             android:backgroundTint="#FFC107"
-            android:textColor="#FFFFFF" />
+            android:text="@string/confirmer_billing"
+            android:textColor="#FFFFFF"
+            tools:ignore="TextContrastCheck,VisualLintButtonSize" />
 
     </LinearLayout>
 

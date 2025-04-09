@@ -53,7 +53,7 @@
             android:id="@+id/dateVol"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date : "
+            android:text="@string/date_flightstatus"
             android:textSize="18sp"
             android:textColor="#000000"
             android:layout_marginTop="8dp" />
@@ -63,7 +63,7 @@
             android:id="@+id/aeroportDepart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Départ : "
+            android:text="@string/d_part_flightstatus"
             android:textSize="18sp"
             android:textColor="#000000"
             android:layout_marginTop="8dp" />
@@ -73,7 +73,7 @@
             android:id="@+id/aeroportArrivee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Arrivée : "
+            android:text="@string/arriv_e_flightstatus"
             android:textSize="18sp"
             android:textColor="#000000"
             android:layout_marginTop="8dp" />

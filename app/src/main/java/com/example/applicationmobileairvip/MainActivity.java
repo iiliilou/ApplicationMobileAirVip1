@@ -49,6 +49,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void authenticateUser(String email, String password) {
+        // Compte d’essai (bypass API)
+        if (email.equals("test@airvip.com") && password.equals("123456")) {
+            SharedPreferences prefs = getSharedPreferences("user_session", MODE_PRIVATE);
+            prefs.edit()
+                    .putString("token", "fake-token-test")
+                    .putString("role", "client")
+                    .putInt("user_id", 9999)
+                    .apply();
+
+            Toast.makeText(MainActivity.this, "Connexion réussie (mode test)", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(MainActivity.this, HomeActivity.class));
+            finish();
+            return;
+        }
+
+        // Appel normal à l’API
         try {
             JSONObject userData = new JSONObject();
             userData.put("adresse_courriel", email);
@@ -63,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
                         String role = json.getString("role");
                         int userId = json.getInt("id");
 
-                        // Enregistrer les infos de session (token, id)
                         SharedPreferences prefs = getSharedPreferences("user_session", MODE_PRIVATE);
                         prefs.edit()
                                 .putString("token", token)
@@ -90,3 +105,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+

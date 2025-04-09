@@ -82,5 +82,18 @@
     <string name="retour_l_accueil_confirmation">Retour à l’accueil</string>
     <string name="votre_paiement_a_t_confirm_confirmation">Votre paiement a été confirmé !</string>
     <string name="merci_pour_votre_r_servation_avec_airvip_confirmation">Merci pour votre réservation avec AirVIP </string>
+    <string name="adresse_de_facturation_billng">Adresse de facturation</string>
+    <string name="confirmer_billing">Confirmer</string>
+    <string name="adresse_rue_num_ro_billing">Adresse (rue, numéro)</string>
+    <string name="code_postal_billing">Code postal</string>
+    <string name="nombilling">Nom</string>
+    <string name="pays_billing">Pays</string>
+    <string name="pr_nom_billing">Prénom</string>
+    <string name="province_tat_billing">Province / État</string>
+    <string name="t_l_phone_billing">Téléphone</string>
+    <string name="ville_billing">Ville</string>
+    <string name="arriv_e_flightstatus">Arrivée :</string>
+    <string name="d_part_flightstatus">Départ :</string>
+    <string name="date_flightstatus">Date :</string>
 
 </resources>
