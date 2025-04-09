@@ -39,13 +39,13 @@ public class HomeActivity extends AppCompatActivity {
             String to = toText.getText().toString().trim();
 
             if (from.isEmpty() || to.isEmpty()) {
-                Toast.makeText(this, "Veuillez remplir les champs de départ, d'arrivée et de date", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Veuillez entrer les codes IATA de départ et d'arrivée", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             Intent intent = new Intent(this, VolListActivity.class);
-            intent.putExtra("from", from);
-            intent.putExtra("to", to);
+            intent.putExtra("DEPART_IATA", from);
+            intent.putExtra("ARRIVEE_IATA", to);
             startActivity(intent);
         });
 

@@ -19,6 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VolListActivity extends AppCompatActivity {
@@ -36,7 +37,7 @@ public class VolListActivity extends AppCompatActivity {
 
         loadVols();
 
-        // ✅ Barre de navigation du bas
+        // Barre de navigation
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.nav_status);
 
@@ -65,10 +66,30 @@ public class VolListActivity extends AppCompatActivity {
                     List<Vol> vols = objectMapper.readValue(response,
                             objectMapper.getTypeFactory().constructCollectionType(List.class, Vol.class));
 
+                    // On récupère les IATA passés par HomeActivity
+                    String departIata = getIntent().getStringExtra("DEPART_IATA");
+                    String arriveeIata = getIntent().getStringExtra("ARRIVEE_IATA");
+
+                    if (departIata != null && arriveeIata != null &&
+                            !departIata.isEmpty() && !arriveeIata.isEmpty()) {
+
+                        List<Vol> volsFiltres = new ArrayList<>();
+                        for (Vol vol : vols) {
+                            if (vol.getAeroportDepart() != null && vol.getAeroportArrive() != null &&
+                                    departIata.equalsIgnoreCase(vol.getAeroportDepart().getCodeIATA()) &&
+                                    arriveeIata.equalsIgnoreCase(vol.getAeroportArrive().getCodeIATA())) {
+                                volsFiltres.add(vol);
+                            }
+                        }
+                        vols = volsFiltres;
+                    }
+
+                    List<Vol> finalVols = vols;
                     runOnUiThread(() -> {
-                        volAdapter = new VolAdapter(vols, vol -> reserverVol(vol.getVolId()));
+                        volAdapter = new VolAdapter(finalVols, vol -> reserverVol(vol.getVolId()));
                         recyclerView.setAdapter(volAdapter);
                     });
+
                 } catch (Exception e) {
                     runOnUiThread(() ->
                             Toast.makeText(VolListActivity.this, "Erreur de traitement : " + e.getMessage(), Toast.LENGTH_LONG).show()
