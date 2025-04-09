@@ -41,9 +41,6 @@ public class VolAdapter extends RecyclerView.Adapter<VolAdapter.VolViewHolder> {
     public void onBindViewHolder(@NonNull VolViewHolder holder, int position) {
         Vol vol = volList.get(position);
 
-        holder.departTime.setText("--:--");
-        holder.arrivalTime.setText("--:--");
-
         holder.airportRoute.setText(
                 vol.getAeroportDepart().getVille() + " ➡ " + vol.getAeroportArrive().getVille()
         );
@@ -80,14 +77,12 @@ public class VolAdapter extends RecyclerView.Adapter<VolAdapter.VolViewHolder> {
 
     static class VolViewHolder extends RecyclerView.ViewHolder {
         ImageView companyLogo;
-        TextView departTime, arrivalTime, airportRoute, flightDuration,
+        TextView  airportRoute, flightDuration,
                 flightDetails, flightWarnings, flightPrice, flightType;
 
         public VolViewHolder(@NonNull View itemView) {
             super(itemView);
             companyLogo = itemView.findViewById(R.id.companyLogo);
-            departTime = itemView.findViewById(R.id.departTime);
-            arrivalTime = itemView.findViewById(R.id.arrivalTime);
             airportRoute = itemView.findViewById(R.id.airportRoute);
             flightDuration = itemView.findViewById(R.id.flightDuration);
             flightDetails = itemView.findViewById(R.id.flightDetails);

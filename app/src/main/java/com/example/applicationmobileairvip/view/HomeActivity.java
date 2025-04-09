@@ -19,7 +19,6 @@ import java.util.Calendar;
 public class HomeActivity extends AppCompatActivity {
 
     private EditText fromText, toText;
-    private EditText departureDateEditText;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -29,22 +28,17 @@ public class HomeActivity extends AppCompatActivity {
 
         fromText = findViewById(R.id.fromText);
         toText = findViewById(R.id.toText);
-        departureDateEditText = findViewById(R.id.editDateDepart);
-        TextView typeVols = findViewById(R.id.typeVols);
         Button btnRechercher = findViewById(R.id.btnRechercher);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         // Fixe le texte à "Aller simple" et empêche le clic
-        typeVols.setText("Aller simple");
-        typeVols.setEnabled(false);
 
         // Lancer la recherche de vols
         btnRechercher.setOnClickListener(v -> {
             String from = fromText.getText().toString().trim();
             String to = toText.getText().toString().trim();
-            String depart = departureDateEditText.getText().toString().trim();
 
-            if (from.isEmpty() || to.isEmpty() || depart.isEmpty()) {
+            if (from.isEmpty() || to.isEmpty()) {
                 Toast.makeText(this, "Veuillez remplir les champs de départ, d'arrivée et de date", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -52,7 +46,6 @@ public class HomeActivity extends AppCompatActivity {
             Intent intent = new Intent(this, VolListActivity.class);
             intent.putExtra("from", from);
             intent.putExtra("to", to);
-            intent.putExtra("departDate", depart);
             startActivity(intent);
         });
 
@@ -72,24 +65,8 @@ public class HomeActivity extends AppCompatActivity {
             return false;
         });
 
-        departureDateEditText.setOnClickListener(v -> showDatePickerDialog(departureDateEditText));
     }
 
-    private void showDatePickerDialog(EditText targetEditText) {
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                this,
-                (view, selectedYear, selectedMonth, selectedDay) -> {
-                    String selectedDate = selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear;
-                    targetEditText.setText(selectedDate);
-                },
-                year, month, day
-        );
-        datePickerDialog.show();
-    }
 }
 

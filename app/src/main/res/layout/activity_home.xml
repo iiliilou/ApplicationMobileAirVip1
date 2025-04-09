@@ -9,22 +9,24 @@
     tools:ignore="ExtraText">
 
     <!-- Logo -->
+
+    <!-- Titre -->
     <ImageView
         android:id="@+id/logoImage"
-        android:layout_width="500dp"
-        android:layout_height="50dp"
+        android:layout_width="135dp"
+        android:layout_height="55dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_margin="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="181dp"
+        android:layout_marginEnd="260dp"
+        android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:contentDescription="@string/todo"
         android:src="@drawable/img_1"
         tools:ignore="ImageContrastCheck" />
 
-    <!-- Titre -->
     <TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
@@ -46,29 +48,7 @@
         android:layout_below="@id/titleText"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal"
-        android:layout_marginTop="12dp">
-
-        <Button
-            android:id="@+id/buttonVols"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/vols_home"
-            android:backgroundTint="#DDDDDD"
-            android:textColor="#000000"
-            android:padding="10dp"
-            android:layout_marginEnd="8dp" />
-
-        <Button
-            android:id="@+id/buttonRecent"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/recent_home"
-            android:backgroundTint="#DDDDDD"
-            android:textColor="#000000"
-            android:padding="10dp" />
-    </LinearLayout>
+        android:layout_marginTop="12dp"/>
 
     <!-- Zone de recherche -->
     <LinearLayout
@@ -125,36 +105,8 @@
         </LinearLayout>
 
         <!-- Type de vol -->
-        <TextView
-            android:id="@+id/typeVols"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/aller_simple_home"
-            android:textColor="#000000"
-            android:textSize="18sp"
-            android:layout_marginTop="8dp"
-            android:layout_gravity="center_horizontal" />
 
         <!-- Date de départ -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/date_de_depart_home"
-            android:textColor="#000000"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="4dp" />
-
-        <EditText
-            android:id="@+id/editDateDepart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:background="@android:drawable/edit_text"
-            android:hint="@string/selectionner_la_date_de_depart_home"
-            android:inputType="date"
-            android:padding="10dp"
-            android:textColorHint="#757575"
-            tools:ignore="VisualLintTextFieldSize" />
 
         <!-- Layout retour (optionnel) -->
         <LinearLayout

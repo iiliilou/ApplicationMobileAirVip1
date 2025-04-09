@@ -12,15 +12,18 @@
     <!-- Logo -->
 
     <!--  Bienvenue -->
+
     <ImageView
         android:id="@+id/logoImage"
         android:layout_width="88dp"
         android:layout_height="88dp"
-        android:layout_gravity="top|start"
-        android:layout_marginStart="24dp"
-        android:contentDescription="@string/logo_air_vip"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
         android:src="@drawable/img_1"
+        android:contentDescription="@string/logo_air_vip"
         tools:ignore="ImageContrastCheck" />
+
 
     <TextView
         android:id="@+id/titleText"

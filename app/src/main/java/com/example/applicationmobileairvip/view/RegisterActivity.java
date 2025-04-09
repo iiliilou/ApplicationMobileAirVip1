@@ -14,10 +14,13 @@ import com.example.applicationmobileairvip.R;
 
 import org.json.JSONObject;
 
+/** minimum 8 caractere pour la creation d'un mot de passe sinon ne fonctionne pas */
+
+
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText lastNameEditText, firstNameEditText, birthDateEditText;
-    private EditText phoneEditText, emailEditText, passwordEditText, confirmPasswordEditText;
+    private EditText lastNameEditText, firstNameEditText;
+    private EditText  emailEditText, passwordEditText, confirmPasswordEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +30,6 @@ public class RegisterActivity extends AppCompatActivity {
         // Liaison des composants
         lastNameEditText = findViewById(R.id.lastNameEditText);
         firstNameEditText = findViewById(R.id.firstNameEditText);
-        birthDateEditText = findViewById(R.id.birthDateEditText);
-        phoneEditText = findViewById(R.id.phoneEditText);
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         confirmPasswordEditText = findViewById(R.id.confirmPasswordEditText);
@@ -39,8 +40,6 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(v -> {
             String nom = lastNameEditText.getText().toString().trim();
             String prenom = firstNameEditText.getText().toString().trim();
-            String naissance = birthDateEditText.getText().toString().trim(); // optionnel
-            String telephone = phoneEditText.getText().toString().trim();     // optionnel
             String email = emailEditText.getText().toString().trim();
             String motdepasse = passwordEditText.getText().toString().trim();
             String confirmation = confirmPasswordEditText.getText().toString().trim();
