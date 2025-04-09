@@ -1,9 +1,11 @@
-package com.example.applicationmobileairvip;
+package com.example.applicationmobileairvip.view;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.applicationmobileairvip.R;
 
 public class ConfirmationActivity extends AppCompatActivity {
 

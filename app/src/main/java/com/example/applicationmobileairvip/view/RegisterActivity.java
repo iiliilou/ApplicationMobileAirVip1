@@ -1,4 +1,4 @@
-package com.example.applicationmobileairvip;
+package com.example.applicationmobileairvip.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.applicationmobileairvip.api.ApiClient;
+import com.example.applicationmobileairvip.R;
 
 import org.json.JSONObject;
 

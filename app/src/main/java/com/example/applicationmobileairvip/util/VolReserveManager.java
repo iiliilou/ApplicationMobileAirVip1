@@ -1,4 +1,6 @@
-package com.example.applicationmobileairvip;
+package com.example.applicationmobileairvip.util;
+
+import com.example.applicationmobileairvip.model.Vol;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.applicationmobileairvip;
+package com.example.applicationmobileairvip.view;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.applicationmobileairvip.api.ApiClient;
+import com.example.applicationmobileairvip.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONObject;

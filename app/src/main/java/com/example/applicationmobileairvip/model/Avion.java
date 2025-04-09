@@ -1,4 +1,4 @@
-package com.example.applicationmobileairvip;
+package com.example.applicationmobileairvip.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.applicationmobileairvip;
+package com.example.applicationmobileairvip.api;
 
 import android.os.Handler;
 import android.os.Looper;
