@@ -17,8 +17,6 @@ import com.example.applicationmobileairvip.adapter.VolAdapter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +84,11 @@ public class VolListActivity extends AppCompatActivity {
 
                     List<Vol> finalVols = vols;
                     runOnUiThread(() -> {
-                        volAdapter = new VolAdapter(finalVols, vol -> reserverVol(vol.getVolId()));
+                        volAdapter = new VolAdapter(finalVols, vol -> {
+                            Intent intent = new Intent(VolListActivity.this, FlightStatusActivity.class);
+                            intent.putExtra("vol_id", vol.getVolId());
+                            startActivity(intent);
+                        });
                         recyclerView.setAdapter(volAdapter);
                     });
 
@@ -104,40 +106,5 @@ public class VolListActivity extends AppCompatActivity {
                 );
             }
         });
-    }
-
-    private void reserverVol(int volId) {
-        try {
-            SharedPreferences prefs = getSharedPreferences("user_session", MODE_PRIVATE);
-            int userId = prefs.getInt("user_id", -1);
-
-            if (userId == -1) {
-                Toast.makeText(this, "Utilisateur non connecté", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            JSONObject reservationData = new JSONObject();
-            reservationData.put("vol_id", volId);
-            reservationData.put("user_id", userId);
-
-            ApiClient.post("/reservations", reservationData, new ApiClient.ApiCallback() {
-                @Override
-                public void onSuccess(String response) {
-                    runOnUiThread(() ->
-                            Toast.makeText(VolListActivity.this, "Réservation effectuée avec succès !", Toast.LENGTH_SHORT).show()
-                    );
-                }
-
-                @Override
-                public void onError(Exception e) {
-                    runOnUiThread(() ->
-                            Toast.makeText(VolListActivity.this, "Erreur lors de la réservation : " + e.getMessage(), Toast.LENGTH_SHORT).show()
-                    );
-                }
-            });
-
-        } catch (Exception e) {
-            Toast.makeText(this, "Erreur : " + e.getMessage(), Toast.LENGTH_SHORT).show();
-        }
     }
 }

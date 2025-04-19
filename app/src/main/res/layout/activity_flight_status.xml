@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,7 +6,6 @@
     android:background="#FFFFFF"
     tools:context=".view.FlightStatusActivity">
 
-    <!-- Titre -->
     <TextView
         android:id="@+id/titreStatutVol"
         android:layout_width="wrap_content"
@@ -19,78 +17,75 @@
         android:layout_marginTop="24dp"
         android:layout_centerHorizontal="true" />
 
-    <!-- Détails du vol -->
-    <LinearLayout
-        android:id="@+id/detailsContainer"
+    <ScrollView
+        android:id="@+id/scrollContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp"
-        android:layout_below="@id/titreStatutVol">
+        android:layout_below="@id/titreStatutVol"
+        android:layout_above="@id/bottom_navigation">
 
-        <!-- Numéro de vol -->
-        <TextView
-            android:id="@+id/numeroVol"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Vol : "
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#000000" />
+            android:orientation="vertical"
+            android:padding="24dp">
 
-        <!-- Heure de décollage -->
-        <TextView
-            android:id="@+id/heureDecollage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Heure de décollage : "
-            android:textSize="18sp"
-            android:textColor="#000000"
-            android:layout_marginTop="8dp" />
+            <TextView
+                android:id="@+id/numeroVol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vol : "
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#000000" />
 
-        <!-- Date -->
-        <TextView
-            android:id="@+id/dateVol"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/date_flightstatus"
-            android:textSize="18sp"
-            android:textColor="#000000"
-            android:layout_marginTop="8dp" />
+            <TextView
+                android:id="@+id/aeroportDepart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Départ : "
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:layout_marginTop="8dp" />
 
-        <!-- Aéroport de départ -->
-        <TextView
-            android:id="@+id/aeroportDepart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/d_part_flightstatus"
-            android:textSize="18sp"
-            android:textColor="#000000"
-            android:layout_marginTop="8dp" />
+            <TextView
+                android:id="@+id/aeroportArrivee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Arrivée : "
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:layout_marginTop="8dp" />
 
-        <!-- Aéroport d’arrivée -->
-        <TextView
-            android:id="@+id/aeroportArrivee"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/arriv_e_flightstatus"
-            android:textSize="18sp"
-            android:textColor="#000000"
-            android:layout_marginTop="8dp" />
+            <TextView
+                android:id="@+id/textPrix"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prix : --"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:layout_marginTop="16dp" />
 
-        <!-- Statut du vol -->
-        <TextView
-            android:id="@+id/retardStatut"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Statut : "
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#000000"
-            android:layout_marginTop="16dp" />
-    </LinearLayout>
+            <Button
+                android:id="@+id/btn_retour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Retour"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#EEEEEE"
+                android:textColor="#000000" />
 
-    <!-- Bottom Navigation -->
+            <Button
+                android:id="@+id/btn_reserver"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Réserver"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="#FFC107"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+    </ScrollView>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -98,9 +93,5 @@
         android:layout_alignParentBottom="true"
         android:background="@android:color/white"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_nav_menu"
-        tools:ignore="VisualLintBottomNav" />
-
+        app:menu="@menu/bottom_nav_menu" />
 </RelativeLayout>
-
-

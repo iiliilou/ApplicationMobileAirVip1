@@ -1,40 +1,52 @@
 package com.example.applicationmobileairvip.view;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.applicationmobileairvip.api.ApiClient;
 import com.example.applicationmobileairvip.R;
+import com.example.applicationmobileairvip.api.ApiClient;
 import com.example.applicationmobileairvip.model.Vol;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class FlightStatusActivity extends AppCompatActivity {
 
-    private TextView tvNumeroVol, tvHeureDecollage, tvDateVol, tvDepart, tvArrivee, tvStatut;
+    private TextView tvNumeroVol, tvDepart, tvArrivee, tvPrix;
+    private Button btnReserver;
+    private Vol currentVol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flight_status);
 
-        // Lier les vues
         tvNumeroVol = findViewById(R.id.numeroVol);
-        tvHeureDecollage = findViewById(R.id.heureDecollage);
-        tvDateVol = findViewById(R.id.dateVol);
         tvDepart = findViewById(R.id.aeroportDepart);
         tvArrivee = findViewById(R.id.aeroportArrivee);
-        tvStatut = findViewById(R.id.retardStatut);
+        tvPrix = findViewById(R.id.textPrix);
+        btnReserver = findViewById(R.id.btn_reserver);
 
-        // Navigation inférieure
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.nav_status);
-        bottomNavigationView.setOnItemSelectedListener(item -> {
+        findViewById(R.id.btn_retour).setOnClickListener(v -> finish());
+
+        btnReserver.setOnClickListener(v -> {
+            if (currentVol != null) {
+                Intent intent = new Intent(FlightStatusActivity.this, ConfirmationActivity.class);
+                intent.putExtra("vol_id", currentVol.getVolId());
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Vol non chargé", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        BottomNavigationView nav = findViewById(R.id.bottom_navigation);
+        nav.setSelectedItemId(R.id.nav_status);
+        nav.setOnItemSelectedListener(item -> {
+
             int id = item.getItemId();
             if (id == R.id.nav_reserver) {
                 startActivity(new Intent(this, HomeActivity.class));
@@ -43,18 +55,17 @@ public class FlightStatusActivity extends AppCompatActivity {
                 startActivity(new Intent(this, TripsActivity.class));
                 return true;
             } else if (id == R.id.nav_settings) {
-                startActivity(new Intent(this, CompteActivity.class));
+                startActivity(new Intent(this, SettingsActivity.class));
                 return true;
             }
             return false;
         });
 
-        // Récupère l’ID du vol envoyé depuis une autre activité
         int volId = getIntent().getIntExtra("vol_id", -1);
         if (volId != -1) {
             chargerStatutVol(volId);
         } else {
-            Toast.makeText(this, "Aucun ID de vol reçu", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Aucun vol reçu", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -65,35 +76,22 @@ public class FlightStatusActivity extends AppCompatActivity {
                 try {
                     ObjectMapper mapper = new ObjectMapper();
                     Vol vol = mapper.readValue(response, Vol.class);
+                    currentVol = vol;
 
                     runOnUiThread(() -> {
                         tvNumeroVol.setText("Vol #" + vol.getVolId());
-                        tvHeureDecollage.setText("Heure de décollage : --:--"); // peut être mise à jour plus tard
-                        tvDateVol.setText("Durée : " + vol.getTemps() + " h");
                         tvDepart.setText("Départ : " + vol.getAeroportDepart().getCodeIATA());
                         tvArrivee.setText("Arrivée : " + vol.getAeroportArrive().getCodeIATA());
-
-                        // Simuler un statut
-                        boolean enRetard = false;
-                        if (enRetard) {
-                            tvStatut.setText("Statut : Retardé de 45 min");
-                            tvStatut.setTextColor(Color.parseColor("#D32F2F"));
-                        } else {
-                            tvStatut.setText("Statut : À l'heure");
-                            tvStatut.setTextColor(Color.parseColor("#4CAF50"));
-                        }
+                        tvPrix.setText("Prix : " + vol.getPrix() + " $CA");
                     });
-
                 } catch (Exception e) {
-                    runOnUiThread(() ->
-                            Toast.makeText(FlightStatusActivity.this, "Erreur JSON : " + e.getMessage(), Toast.LENGTH_LONG).show());
+                    runOnUiThread(() -> Toast.makeText(FlightStatusActivity.this, "Erreur JSON : " + e.getMessage(), Toast.LENGTH_LONG).show());
                 }
             }
 
             @Override
             public void onError(Exception e) {
-                runOnUiThread(() ->
-                        Toast.makeText(FlightStatusActivity.this, "Erreur API : " + e.getMessage(), Toast.LENGTH_LONG).show());
+                runOnUiThread(() -> Toast.makeText(FlightStatusActivity.this, "Erreur API : " + e.getMessage(), Toast.LENGTH_LONG).show());
             }
         });
     }
