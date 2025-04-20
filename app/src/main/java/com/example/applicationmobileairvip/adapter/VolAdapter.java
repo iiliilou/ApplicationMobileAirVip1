@@ -41,17 +41,27 @@ public class VolAdapter extends RecyclerView.Adapter<VolAdapter.VolViewHolder> {
     public void onBindViewHolder(@NonNull VolViewHolder holder, int position) {
         Vol vol = volList.get(position);
 
-        holder.airportRoute.setText(
-                vol.getAeroportDepart().getVille() + " ➡ " + vol.getAeroportArrive().getVille()
-        );
+        // Aéroports
+        String route = vol.getAeroportDepart().getVille() + " ➡ " + vol.getAeroportArrive().getVille();
+        holder.airportRoute.setText(route);
 
-        holder.flightDuration.setText(vol.getTemps() + "h - " + vol.getNbPlace() + " places");
+        // Durée et nombre de places
+        String duration = vol.getTemps() + " h · " + vol.getNbPlace() + " places";
+        holder.flightDuration.setText(duration);
+
+        // Détails avion
         holder.flightDetails.setText(vol.getAvion().getModele());
+
+        // Disponibilité (ou avertissement)
         holder.flightWarnings.setText(vol.getDisponibilite());
-        holder.flightPrice.setText(vol.getPrix() + " $CA");
+
+        // Prix
+        holder.flightPrice.setText(String.format("%.0f $", vol.getPrix()));
+
+        // Type (on affiche le numéro de vol)
         holder.flightType.setText("Vol #" + vol.getVolId());
 
-        // Charger l’image de l’avion
+        // Image
         String imageUrl = null;
         if (vol.getAvion().getImages() != null && !vol.getAvion().getImages().isEmpty()) {
             imageUrl = vol.getAvion().getImages().get(0).getUrl();
@@ -66,7 +76,7 @@ public class VolAdapter extends RecyclerView.Adapter<VolAdapter.VolViewHolder> {
             holder.companyLogo.setImageResource(R.drawable.ic_plane);
         }
 
-        // ➕ Clic sur le vol
+        // Clic sur la carte
         holder.itemView.setOnClickListener(v -> clickListener.onVolClick(vol));
     }
 
@@ -77,8 +87,7 @@ public class VolAdapter extends RecyclerView.Adapter<VolAdapter.VolViewHolder> {
 
     static class VolViewHolder extends RecyclerView.ViewHolder {
         ImageView companyLogo;
-        TextView  airportRoute, flightDuration,
-                flightDetails, flightWarnings, flightPrice, flightType;
+        TextView airportRoute, flightDuration, flightDetails, flightWarnings, flightPrice, flightType;
 
         public VolViewHolder(@NonNull View itemView) {
             super(itemView);

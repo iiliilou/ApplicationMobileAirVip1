@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="4dp"
+    android:backgroundTint="#FFFFFF"
     app:strokeColor="#DDDDDD"
-    app:strokeWidth="1dp"
-    android:backgroundTint="#FFFFFF">
+    app:strokeWidth="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,77 +16,87 @@
         android:orientation="vertical"
         android:padding="12dp">
 
-        <!-- Heures et aéroports -->
+        <!-- Image avion -->
+        <ImageView
+            android:id="@+id/companyLogo"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/logo_compagnie_flightitem"
+            android:src="@drawable/ic_plane" />
+
+        <!-- Ligne aéroports avec icônes -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp">
 
-            <View
-                android:layout_width="16dp"
-                android:layout_height="1dp" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-            <!-- ajout d'un icone  -->
             <ImageView
-                android:id="@+id/companyLogo"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:contentDescription="@string/logo_compagnie_flightitem"
-                android:src="@drawable/ic_plane"
-                tools:ignore="ImageContrastCheck" />
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_takeoff"
+                android:contentDescription="Départ" />
+
+            <TextView
+                android:id="@+id/airportRoute"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Montréal ➡ Paris"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_landing"
+                android:contentDescription="Arrivée" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/airportRoute"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/yul_cun_flightitem"
-            android:textSize="14sp"
-            android:textColor="#666666"
-            android:layout_marginTop="2dp" />
-
-        <!-- Infos durée et escales -->
+        <!-- Durée et places -->
         <TextView
             android:id="@+id/flightDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/_1_escale_ywg_24_h_34_min_flightitem"
-            android:textColor="#000000"
+            android:text="8 h - 12 places"
             android:textSize="14sp"
+            android:textColor="#000000"
             android:layout_marginTop="4dp" />
 
-        <!-- Infos supplémentaires (compagnie, remarques) -->
+        <!-- Modèle d’avion -->
         <TextView
             android:id="@+id/flightDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/airvip_31_d_missions_flightitem"
+            android:text="Bombardier Global Express"
             android:textColor="#00796B"
             android:textSize="13sp"
             android:layout_marginTop="2dp" />
 
+        <!-- Disponibilité -->
         <TextView
             android:id="@+id/flightWarnings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/escale_de_nuit_billets_s_par_s_flightitem"
+            android:text="Disponible"
             android:textColor="#D32F2F"
             android:textSize="13sp"
             android:layout_marginTop="2dp" />
 
-        <!-- Ligne séparation -->
+        <!-- Séparation -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#EEEEEE"
             android:layout_marginVertical="8dp" />
 
-        <!-- Prix + type de billet -->
+        <!-- Prix et identifiant vol -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,7 +107,7 @@
                 android:id="@+id/flightPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/_16_046_ca_flightitem"
+                android:text="63.000 $"
                 android:textColor="#EF6C00"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -107,12 +116,10 @@
                 android:id="@+id/flightType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/aller_retour_flightitem"
+                android:text="Vol #123"
                 android:textColor="#000000"
                 android:textSize="14sp"
                 android:layout_marginStart="12dp" />
-
-
         </LinearLayout>
 
     </LinearLayout>
