@@ -16,10 +16,15 @@ public class BillingActivity extends AppCompatActivity {
     private EditText editPrenom, editNom, editAdresse, editVille,
             editProvince, editCodePostal, editPays, editTelephone;
 
+    private int volId = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_billing);
+
+        // Récupérer le vol_id
+        volId = getIntent().getIntExtra("vol_id", -1);
 
         // Lier les champs
         editPrenom = findViewById(R.id.editPrenom);
@@ -44,12 +49,14 @@ public class BillingActivity extends AppCompatActivity {
             String telephone = editTelephone.getText().toString().trim();
 
             if (validerChamps(prenom, nom, adresse, ville, province, codePostal, pays, telephone)) {
-                Toast.makeText(this, " Adresse enregistrée", Toast.LENGTH_LONG).show();
+                if (volId == -1) {
+                    Toast.makeText(this, "Aucun vol associé à cette commande", Toast.LENGTH_LONG).show();
+                    return;
+                }
 
-                // Tu pourrais aussi sauvegarder localement ou envoyer à ton API ici
-
-                // ➜ Lancer l'activité de paiement
+                // Rediriger vers PaiementActivity avec vol_id
                 Intent intent = new Intent(this, PaiementActivity.class);
+                intent.putExtra("vol_id", volId);
                 startActivity(intent);
             }
         });

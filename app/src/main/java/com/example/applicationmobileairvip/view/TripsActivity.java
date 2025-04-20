@@ -9,14 +9,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.applicationmobileairvip.api.ApiClient;
 import com.example.applicationmobileairvip.R;
-import com.example.applicationmobileairvip.model.Vol;
 import com.example.applicationmobileairvip.adapter.VolAdapter;
+import com.example.applicationmobileairvip.api.ApiClient;
+import com.example.applicationmobileairvip.model.Reservation;
+import com.example.applicationmobileairvip.model.Vol;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TripsActivity extends AppCompatActivity {
@@ -32,10 +34,8 @@ public class TripsActivity extends AppCompatActivity {
         recyclerViewTrips = findViewById(R.id.recyclerViewTrips);
         recyclerViewTrips.setLayoutManager(new LinearLayoutManager(this));
 
-        // Barre de navigation
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.nav_trips);
-
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_reserver) {
@@ -51,11 +51,10 @@ public class TripsActivity extends AppCompatActivity {
             return false;
         });
 
-        // Chargement des vols réservés
-        loadVolsReserves();
+        loadReservations();
     }
 
-    private void loadVolsReserves() {
+    private void loadReservations() {
         SharedPreferences prefs = getSharedPreferences("user_session", MODE_PRIVATE);
         int userId = prefs.getInt("user_id", -1);
 
@@ -71,23 +70,30 @@ public class TripsActivity extends AppCompatActivity {
             public void onSuccess(String response) {
                 try {
                     ObjectMapper mapper = new ObjectMapper();
-                    List<Vol> vols = mapper.readValue(response, new TypeReference<List<Vol>>() {});
+                    List<Reservation> reservations = mapper.readValue(response, new TypeReference<List<Reservation>>() {});
+                    List<Vol> vols = new ArrayList<>();
+
+                    for (Reservation res : reservations) {
+                        if (res.getVol() != null) {
+                            vols.add(res.getVol());
+                        }
+                    }
+
                     runOnUiThread(() -> {
                         volAdapter = new VolAdapter(vols, vol -> {});
                         recyclerViewTrips.setAdapter(volAdapter);
                     });
+
                 } catch (Exception e) {
                     runOnUiThread(() ->
-                            Toast.makeText(TripsActivity.this, "Erreur JSON : " + e.getMessage(), Toast.LENGTH_LONG).show()
-                    );
+                            Toast.makeText(TripsActivity.this, "Erreur JSON : " + e.getMessage(), Toast.LENGTH_LONG).show());
                 }
             }
 
             @Override
             public void onError(Exception e) {
                 runOnUiThread(() ->
-                        Toast.makeText(TripsActivity.this, "Erreur API : " + e.getMessage(), Toast.LENGTH_LONG).show()
-                );
+                        Toast.makeText(TripsActivity.this, "Erreur API : " + e.getMessage(), Toast.LENGTH_LONG).show());
             }
         });
     }

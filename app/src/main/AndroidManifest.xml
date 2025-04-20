@@ -24,6 +24,9 @@
         <activity android:name=".view.SettingsActivity" />
         <activity android:name=".view.CompteActivity" />
         <activity android:name=".view.VolListActivity" />
+        <activity android:name=".view.ConfirmationActivity" />
+        <activity android:name=".view.BillingActivity" />
+        <activity android:name=".view.PaiementActivity" />
 
         <activity
             android:name=".view.MainActivity"
