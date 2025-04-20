@@ -1,6 +1,7 @@
 package com.example.applicationmobileairvip.view;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -10,15 +11,22 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.applicationmobileairvip.R;
+import com.example.applicationmobileairvip.api.ApiClient;
+
+import org.json.JSONObject;
 
 public class PaiementActivity extends AppCompatActivity {
 
     private EditText editNumeroCarte, editNomCarte, editExpiration, editCVV;
+    private int volId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paiement);
+
+        // Récupérer le vol_id
+        volId = getIntent().getIntExtra("vol_id", -1);
 
         // Lier les éléments du layout
         editNumeroCarte = findViewById(R.id.editNumeroCarte);
@@ -35,18 +43,49 @@ public class PaiementActivity extends AppCompatActivity {
             String cvv = editCVV.getText().toString().trim();
 
             if (validerChamps(numeroCarte, nomCarte, expiration, cvv)) {
-                Toast.makeText(this, " Paiement effectué avec succès !", Toast.LENGTH_LONG).show();
+                if (volId == -1) {
+                    Toast.makeText(this, "Aucun vol sélectionné", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                // Exemple d’un vol simulé (à adapter avec les vrais vols)
-                //Vol volAchete = new Vol("AI245", "YUL", "CDG", "2025-04-07", "13:30", 30500.0); --  a modifier
+                // Récupérer l'email depuis SharedPreferences
+                SharedPreferences prefs = getSharedPreferences("user_session", MODE_PRIVATE);
+                String email = prefs.getString("user_email", null);
 
-                // Ajouter le vol à l'historique
-                //VolReserveManager.ajouterVol(volAchete);
+                if (email == null) {
+                    Toast.makeText(this, "Utilisateur non connecté", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                // Redirection vers l'activité de confirmation
-                Intent intent = new Intent(this, ConfirmationActivity.class);
-                startActivity(intent);
-                finish(); // Fermer la page de paiement
+                // Créer le JSON pour la réservation
+                try {
+                    JSONObject json = new JSONObject();
+                    json.put("email", email);
+                    json.put("volId", volId);
+
+                    // Envoi à l’API REST
+                    ApiClient.post("/reservations", json, new ApiClient.ApiCallback() {
+                        @Override
+                        public void onSuccess(String response) {
+                            runOnUiThread(() -> {
+                                Toast.makeText(PaiementActivity.this, "Réservation confirmée !", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(PaiementActivity.this, TripsActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                                finish();
+                            });
+                        }
+
+                        @Override
+                        public void onError(Exception e) {
+                            runOnUiThread(() ->
+                                    Toast.makeText(PaiementActivity.this, "Erreur API : " + e.getMessage(), Toast.LENGTH_LONG).show());
+                        }
+                    });
+
+                } catch (Exception e) {
+                    Toast.makeText(this, "Erreur lors de la création JSON : " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -58,23 +97,20 @@ public class PaiementActivity extends AppCompatActivity {
         }
 
         if (TextUtils.isEmpty(nom)) {
-            Toast.makeText(this, "Nom sur la carte requis", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Nom requis", Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if (TextUtils.isEmpty(expiration) || !expiration.matches("(0[1-9]|1[0-2])/[0-9]{2}")) {
-            Toast.makeText(this, "Date d'expiration invalide (format MM/AA)", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Date invalide (format MM/AA)", Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if (TextUtils.isEmpty(cvv) || cvv.length() < 3 || cvv.length() > 4) {
-            Toast.makeText(this, "Code de sécurité invalide", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "CVV invalide", Toast.LENGTH_SHORT).show();
             return false;
         }
 
         return true;
     }
 }
-
-
-

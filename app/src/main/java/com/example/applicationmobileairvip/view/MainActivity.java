@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     .putString("token", "fake-token-test")
                     .putString("role", "client")
                     .putInt("user_id", 9999)
+                    .putString("user_email", email) // ✅ Ajout ici
                     .apply();
 
             Toast.makeText(MainActivity.this, "Connexion réussie (mode test)", Toast.LENGTH_SHORT).show();
@@ -81,13 +82,12 @@ public class MainActivity extends AppCompatActivity {
                         String role = json.getString("role");
                         int userId = json.getInt("id");
 
-
-
                         SharedPreferences prefs = getSharedPreferences("user_session", MODE_PRIVATE);
                         prefs.edit()
                                 .putString("token", token)
                                 .putString("role", role)
                                 .putInt("user_id", userId)
+                                .putString("user_email", email) // ✅ Ajout ici aussi
                                 .apply();
 
                         Toast.makeText(MainActivity.this, "Connexion réussie", Toast.LENGTH_SHORT).show();
@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                         runOnUiThread(() -> Toast.makeText(MainActivity.this, "Erreur JSON : " + e.getMessage(), Toast.LENGTH_LONG).show());
                     }
                 }
+
                 @Override
                 public void onError(Exception e) {
                     runOnUiThread(() -> Toast.makeText(MainActivity.this, "Erreur : " + e.getMessage(), Toast.LENGTH_LONG).show());
@@ -108,4 +109,3 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
-

@@ -1,20 +1,16 @@
 package com.example.applicationmobileairvip.view;
 
 import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.applicationmobileairvip.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.Calendar;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -31,25 +27,31 @@ public class HomeActivity extends AppCompatActivity {
         Button btnRechercher = findViewById(R.id.btnRechercher);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        // Fixe le texte à "Aller simple" et empêche le clic
-
-        // Lancer la recherche de vols
+        //  Recherche de vols
         btnRechercher.setOnClickListener(v -> {
             String from = fromText.getText().toString().trim();
             String to = toText.getText().toString().trim();
 
+            //  Validation simple
             if (from.isEmpty() || to.isEmpty()) {
                 Toast.makeText(this, "Veuillez entrer les codes IATA de départ et d'arrivée", Toast.LENGTH_SHORT).show();
                 return;
             }
 
+            //  Vérifie que ce sont bien des codes IATA de 3 lettres
+            if (from.length() != 3 || to.length() != 3) {
+                Toast.makeText(this, "Les codes IATA doivent contenir exactement 3 lettres", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            //  Met en majuscules pour cohérence avec l'API
             Intent intent = new Intent(this, VolListActivity.class);
-            intent.putExtra("DEPART_IATA", from);
-            intent.putExtra("ARRIVEE_IATA", to);
+            intent.putExtra("DEPART_IATA", from.toUpperCase());
+            intent.putExtra("ARRIVEE_IATA", to.toUpperCase());
             startActivity(intent);
         });
 
-        // Navigation entre les activités via la barre inférieure
+        //  Barre de navigation inférieure
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_status) {
@@ -64,9 +66,5 @@ public class HomeActivity extends AppCompatActivity {
             }
             return false;
         });
-
     }
-
-
 }
-

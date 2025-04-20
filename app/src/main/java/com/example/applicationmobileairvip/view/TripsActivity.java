@@ -34,6 +34,7 @@ public class TripsActivity extends AppCompatActivity {
         recyclerViewTrips = findViewById(R.id.recyclerViewTrips);
         recyclerViewTrips.setLayoutManager(new LinearLayoutManager(this));
 
+        // Barre de navigation inférieure
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.nav_trips);
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -51,10 +52,11 @@ public class TripsActivity extends AppCompatActivity {
             return false;
         });
 
-        loadReservations();
+        // Charger les réservations de l'utilisateur
+        loadReservationsFromApi();
     }
 
-    private void loadReservations() {
+    private void loadReservationsFromApi() {
         SharedPreferences prefs = getSharedPreferences("user_session", MODE_PRIVATE);
         int userId = prefs.getInt("user_id", -1);
 
@@ -73,14 +75,22 @@ public class TripsActivity extends AppCompatActivity {
                     List<Reservation> reservations = mapper.readValue(response, new TypeReference<List<Reservation>>() {});
                     List<Vol> vols = new ArrayList<>();
 
-                    for (Reservation res : reservations) {
-                        if (res.getVol() != null) {
-                            vols.add(res.getVol());
+                    for (Reservation reservation : reservations) {
+                        Vol vol = reservation.getVol();
+                        if (vol != null) {
+                            vols.add(vol);
                         }
                     }
 
                     runOnUiThread(() -> {
-                        volAdapter = new VolAdapter(vols, vol -> {});
+                        if (vols.isEmpty()) {
+                            Toast.makeText(TripsActivity.this, "Aucune réservation trouvée", Toast.LENGTH_SHORT).show();
+                        }
+                        volAdapter = new VolAdapter(vols, vol -> {
+                            Intent intent = new Intent(TripsActivity.this, FlightStatusActivity.class);
+                            intent.putExtra("vol_id", vol.getVolId());
+                            startActivity(intent);
+                        });
                         recyclerViewTrips.setAdapter(volAdapter);
                     });
 

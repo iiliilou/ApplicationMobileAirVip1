@@ -2,6 +2,7 @@ package com.example.applicationmobileairvip.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,13 +29,17 @@ public class ConfirmationActivity extends AppCompatActivity {
         Button btnRetourAccueil = findViewById(R.id.btnRetourAccueil);
         Button btnPayer = findViewById(R.id.btn_payer);
 
+        // ✅ Récupération du vol_id transmis par FlightStatusActivity
         int volId = getIntent().getIntExtra("vol_id", -1);
+        Log.d("DEBUG_CONFIRMATION", "Reçu vol_id = " + volId);
+
         if (volId != -1) {
             chargerDetailsVol(volId);
         } else {
             Toast.makeText(this, "Aucun ID de vol reçu", Toast.LENGTH_SHORT).show();
         }
 
+        // Retour à l'accueil
         btnRetourAccueil.setOnClickListener(v -> {
             Intent intent = new Intent(this, HomeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -42,6 +47,7 @@ public class ConfirmationActivity extends AppCompatActivity {
             finish();
         });
 
+        // Rediriger vers l'écran de facturation
         btnPayer.setOnClickListener(v -> {
             if (currentVol != null) {
                 Intent intent = new Intent(this, BillingActivity.class);
@@ -63,17 +69,28 @@ public class ConfirmationActivity extends AppCompatActivity {
 
                     runOnUiThread(() -> {
                         textConfirmation.setText("Vol #" + currentVol.getVolId() + " - " + currentVol.getPrix() + " $CA");
-                        textDetails.setText("Départ : " + currentVol.getAeroportDepart().getVille() +
-                                "\nArrivée : " + currentVol.getAeroportArrive().getVille());
+                        textDetails.setText(
+                                "Départ : " + currentVol.getAeroportDepart().getVille() +
+                                        "\nArrivée : " + currentVol.getAeroportArrive().getVille()
+                        );
                     });
+
                 } catch (Exception e) {
-                    runOnUiThread(() -> Toast.makeText(ConfirmationActivity.this, "Erreur JSON : " + e.getMessage(), Toast.LENGTH_LONG).show());
+                    runOnUiThread(() -> Toast.makeText(
+                            ConfirmationActivity.this,
+                            "Erreur JSON : " + e.getMessage(),
+                            Toast.LENGTH_LONG
+                    ).show());
                 }
             }
 
             @Override
             public void onError(Exception e) {
-                runOnUiThread(() -> Toast.makeText(ConfirmationActivity.this, "Erreur API : " + e.getMessage(), Toast.LENGTH_LONG).show());
+                runOnUiThread(() -> Toast.makeText(
+                        ConfirmationActivity.this,
+                        "Erreur API : " + e.getMessage(),
+                        Toast.LENGTH_LONG
+                ).show());
             }
         });
     }

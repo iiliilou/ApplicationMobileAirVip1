@@ -85,10 +85,11 @@ public class VolListActivity extends AppCompatActivity {
                     List<Vol> finalVols = vols;
                     runOnUiThread(() -> {
                         volAdapter = new VolAdapter(finalVols, vol -> {
-                            Intent intent = new Intent(VolListActivity.this, FlightStatusActivity.class);
-                            intent.putExtra("vol_id", vol.getVolId());
+                            Intent intent = new Intent(VolListActivity.this, FlightStatusActivity.class); // ✅ et non ConfirmationActivity
+                            intent.putExtra("vol_id", vol.getVolId()); // 🔥 clé correcte
                             startActivity(intent);
                         });
+
                         recyclerView.setAdapter(volAdapter);
                     });
 

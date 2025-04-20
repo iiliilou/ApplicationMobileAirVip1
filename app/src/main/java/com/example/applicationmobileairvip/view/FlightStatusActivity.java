@@ -2,6 +2,7 @@ package com.example.applicationmobileairvip.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ public class FlightStatusActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flight_status);
 
+        // Liaison des vues
         tvNumeroVol = findViewById(R.id.numeroVol);
         tvDepart = findViewById(R.id.aeroportDepart);
         tvArrivee = findViewById(R.id.aeroportArrivee);
@@ -33,6 +35,17 @@ public class FlightStatusActivity extends AppCompatActivity {
 
         findViewById(R.id.btn_retour).setOnClickListener(v -> finish());
 
+        // ✅ Récupération du vol_id
+        int volId = getIntent().getIntExtra("vol_id", -1);
+        Log.d("DEBUG_VOL_ID", "Reçu dans FlightStatusActivity : vol_id = " + volId);
+
+        if (volId != -1) {
+            chargerStatutVol(volId);
+        } else {
+            Toast.makeText(this, "Aucun ID de vol reçu", Toast.LENGTH_SHORT).show();
+        }
+
+        // 👉 Bouton Réserver
         btnReserver.setOnClickListener(v -> {
             if (currentVol != null) {
                 Intent intent = new Intent(FlightStatusActivity.this, ConfirmationActivity.class);
@@ -43,12 +56,14 @@ public class FlightStatusActivity extends AppCompatActivity {
             }
         });
 
+        // ✅ Barre de navigation inférieure
         BottomNavigationView nav = findViewById(R.id.bottom_navigation);
-        nav.setSelectedItemId(R.id.nav_status);
         nav.setOnItemSelectedListener(item -> {
-
             int id = item.getItemId();
-            if (id == R.id.nav_reserver) {
+            if (id == R.id.nav_status) {
+                // ne rien faire : on est déjà ici
+                return true;
+            } else if (id == R.id.nav_reserver) {
                 startActivity(new Intent(this, HomeActivity.class));
                 return true;
             } else if (id == R.id.nav_trips) {
@@ -60,13 +75,6 @@ public class FlightStatusActivity extends AppCompatActivity {
             }
             return false;
         });
-
-        int volId = getIntent().getIntExtra("vol_id", -1);
-        if (volId != -1) {
-            chargerStatutVol(volId);
-        } else {
-            Toast.makeText(this, "Aucun vol reçu", Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void chargerStatutVol(int volId) {
@@ -75,23 +83,25 @@ public class FlightStatusActivity extends AppCompatActivity {
             public void onSuccess(String response) {
                 try {
                     ObjectMapper mapper = new ObjectMapper();
-                    Vol vol = mapper.readValue(response, Vol.class);
-                    currentVol = vol;
+                    currentVol = mapper.readValue(response, Vol.class);
 
                     runOnUiThread(() -> {
-                        tvNumeroVol.setText("Vol #" + vol.getVolId());
-                        tvDepart.setText("Départ : " + vol.getAeroportDepart().getCodeIATA());
-                        tvArrivee.setText("Arrivée : " + vol.getAeroportArrive().getCodeIATA());
-                        tvPrix.setText("Prix : " + vol.getPrix() + " $CA");
+                        tvNumeroVol.setText("Vol #" + currentVol.getVolId());
+                        tvDepart.setText("Départ : " + currentVol.getAeroportDepart().getCodeIATA());
+                        tvArrivee.setText("Arrivée : " + currentVol.getAeroportArrive().getCodeIATA());
+                        tvPrix.setText("Prix : " + currentVol.getPrix() + " $CA");
                     });
+
                 } catch (Exception e) {
-                    runOnUiThread(() -> Toast.makeText(FlightStatusActivity.this, "Erreur JSON : " + e.getMessage(), Toast.LENGTH_LONG).show());
+                    runOnUiThread(() ->
+                            Toast.makeText(FlightStatusActivity.this, "Erreur JSON : " + e.getMessage(), Toast.LENGTH_LONG).show());
                 }
             }
 
             @Override
             public void onError(Exception e) {
-                runOnUiThread(() -> Toast.makeText(FlightStatusActivity.this, "Erreur API : " + e.getMessage(), Toast.LENGTH_LONG).show());
+                runOnUiThread(() ->
+                        Toast.makeText(FlightStatusActivity.this, "Erreur API : " + e.getMessage(), Toast.LENGTH_LONG).show());
             }
         });
     }
