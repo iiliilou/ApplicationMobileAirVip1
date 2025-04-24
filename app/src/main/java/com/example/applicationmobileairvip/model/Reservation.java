@@ -4,14 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.example.applicationmobileairvip.model.Vol;
 
-@JsonIgnoreProperties(ignoreUnknown = true) // ← ignore les champs inutiles comme "utilisateur"
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Reservation {
 
-    @JsonProperty("id") // ← correspond à la clé réelle dans ton JSON
+    @JsonProperty("id")
     private int reservationId;
 
     @JsonProperty("vol")
-    private Vol vol; // ← assure-toi que la classe Vol est bien importée
+    private Vol vol;
 
     @JsonProperty("dateReservation")
     private String dateReservation;

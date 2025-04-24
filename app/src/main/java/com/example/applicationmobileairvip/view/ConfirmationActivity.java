@@ -29,7 +29,7 @@ public class ConfirmationActivity extends AppCompatActivity {
         Button btnRetourAccueil = findViewById(R.id.btnRetourAccueil);
         Button btnPayer = findViewById(R.id.btn_payer);
 
-        // ✅ Récupération du vol_id transmis par FlightStatusActivity
+        //  Récupération du vol_id transmis par FlightStatusActivity
         int volId = getIntent().getIntExtra("vol_id", -1);
         Log.d("DEBUG_CONFIRMATION", "Reçu vol_id = " + volId);
 

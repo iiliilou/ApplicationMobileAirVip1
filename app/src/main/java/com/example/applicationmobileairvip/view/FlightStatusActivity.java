@@ -35,7 +35,7 @@ public class FlightStatusActivity extends AppCompatActivity {
 
         findViewById(R.id.btn_retour).setOnClickListener(v -> finish());
 
-        // ✅ Récupération du vol_id
+        //  Récupération du vol_id
         int volId = getIntent().getIntExtra("vol_id", -1);
         Log.d("DEBUG_VOL_ID", "Reçu dans FlightStatusActivity : vol_id = " + volId);
 
@@ -45,7 +45,7 @@ public class FlightStatusActivity extends AppCompatActivity {
             Toast.makeText(this, "Aucun ID de vol reçu", Toast.LENGTH_SHORT).show();
         }
 
-        // 👉 Bouton Réserver
+        //  Bouton Réserver
         btnReserver.setOnClickListener(v -> {
             if (currentVol != null) {
                 Intent intent = new Intent(FlightStatusActivity.this, ConfirmationActivity.class);
@@ -56,7 +56,7 @@ public class FlightStatusActivity extends AppCompatActivity {
             }
         });
 
-        // ✅ Barre de navigation inférieure
+        //  Barre de navigation inférieure
         BottomNavigationView nav = findViewById(R.id.bottom_navigation);
         nav.setOnItemSelectedListener(item -> {
             int id = item.getItemId();

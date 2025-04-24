@@ -16,7 +16,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        // 🔽 Gestion de la BottomNavigation
+        //  Gestion de la BottomNavigation
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.nav_settings);
 
@@ -35,7 +35,7 @@ public class SettingsActivity extends AppCompatActivity {
             return false;
         });
 
-        // 🔐 Bouton "Mon compte"
+        //  Bouton "Mon compte"
         LinearLayout layoutAccount = findViewById(R.id.layout_account);
         layoutAccount.setOnClickListener(v -> {
             // À remplacer si tu as une page MonCompteActivity
@@ -43,7 +43,7 @@ public class SettingsActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // 🚪 Bouton "Déconnexion"
+        //  Bouton "Déconnexion"
         LinearLayout layoutLogout = findViewById(R.id.layout_logout);
         layoutLogout.setOnClickListener(v -> {
             // Exemple : retour à l'écran de login

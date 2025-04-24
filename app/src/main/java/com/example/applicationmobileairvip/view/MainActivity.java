@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     .putString("token", "fake-token-test")
                     .putString("role", "client")
                     .putInt("user_id", 9999)
-                    .putString("user_email", email) // ✅ Ajout ici
+                    .putString("user_email", email)
                     .apply();
 
             Toast.makeText(MainActivity.this, "Connexion réussie (mode test)", Toast.LENGTH_SHORT).show();
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                                 .putString("token", token)
                                 .putString("role", role)
                                 .putInt("user_id", userId)
-                                .putString("user_email", email) // ✅ Ajout ici aussi
+                                .putString("user_email", email)
                                 .apply();
 
                         Toast.makeText(MainActivity.this, "Connexion réussie", Toast.LENGTH_SHORT).show();
